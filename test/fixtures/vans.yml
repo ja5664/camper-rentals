@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  location: MyString
+  availability: false
+  description: MyText
+  photo: MyString
+  make: MyString
+  model: MyString
+  bed: 1
+  sleep: 1
+  bathroom: false
+  kitchen: false
+  price: 1
+
+two:
+  user: two
+  location: MyString
+  availability: false
+  description: MyText
+  photo: MyString
+  make: MyString
+  model: MyString
+  bed: 1
+  sleep: 1
+  bathroom: false
+  kitchen: false
+  price: 1
