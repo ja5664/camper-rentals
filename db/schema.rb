@@ -23,6 +23,16 @@ ActiveRecord::Schema.define(version: 20171113163019) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "rentals", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.string "photo"
+    t.integer "price"
+    t.string "status"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
