@@ -23,6 +23,10 @@ ActiveRecord::Schema.define(version: 20171114151005) do
     t.string "photo"
     t.integer "price"
     t.string "status"
+    t.bigint "user_id"
+    t.bigint "van_id"
+    t.index ["user_id"], name: "index_rentals_on_user_id"
+    t.index ["van_id"], name: "index_rentals_on_van_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -78,5 +82,7 @@ ActiveRecord::Schema.define(version: 20171114151005) do
 
   add_foreign_key "reviews", "users"
   add_foreign_key "reviews", "vans"
+  add_foreign_key "rentals", "users"
+  add_foreign_key "rentals", "vans"
   add_foreign_key "vans", "users"
 end

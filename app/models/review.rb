@@ -1,3 +1,3 @@
 class Review < ApplicationRecord
-  belongs_to :van
+  validates :score, :description, :photo, presence: true
 end

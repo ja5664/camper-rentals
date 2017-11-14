@@ -1,17 +1,17 @@
 class VansController < ApplicationController
   before_action :set_van, only: [:show, :edit, :update, :destroy]
 
+  skip_before_action :authenticate_user!, only: :index
+
   def index
     @vans = Van.all
   end
 
   def new
-    authorize @van
     @van = Van.new
   end
 
   def create
-    authorize @van
     @van = Van.new(van_params)
     if @van.save
       redirect_to van_path(@van)
@@ -21,11 +21,9 @@ class VansController < ApplicationController
   end
 
   def edit
-    authorize @van
   end
 
   def update
-    authorize @van
     if @van.update(van_params)
       redirect_to van_path(@van)
     else
@@ -37,7 +35,6 @@ class VansController < ApplicationController
   end
 
   def destroy
-    authorize @van
     @van.destroy
     redirect_to vans_path
   end
