@@ -80,9 +80,9 @@ ActiveRecord::Schema.define(version: 20171114151005) do
     t.index ["user_id"], name: "index_vans_on_user_id"
   end
 
-  add_foreign_key "reviews", "users"
-  add_foreign_key "reviews", "vans"
   add_foreign_key "rentals", "users"
   add_foreign_key "rentals", "vans"
+  add_foreign_key "reviews", "users"
+  add_foreign_key "reviews", "vans"
   add_foreign_key "vans", "users"
 end

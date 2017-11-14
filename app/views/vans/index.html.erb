@@ -1,9 +1,16 @@
-<h1>All Vans</h1>
-
-<ul>
-  <% @vans.each do |van| %>
-    <li><%= link_to van.description, van_path(van) %></li>
-  <% end %>
-</ul>
-
 <%= link_to "Add new van", new_van_path %>
+
+<div class="cards">
+  <% @vans.each do |van| %>
+    <div class="col-xs-12 col-sm-3">
+      <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("https://asideofsweet.com/wp-content/uploads/2017/05/VanLife-Custom-Camper-Van-Travel-DIY-Inspiration.jpg");">
+        <div class="card-body">
+          <h5><%= van.make %> <%= van.model %></h5>
+          <h5>£<%= van.price %></h5>
+          <%= link_to "", van_path(van), class: "card-link" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
