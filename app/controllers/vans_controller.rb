@@ -1,5 +1,7 @@
 class VansController < ApplicationController
-  before_action :set_van, only [:show, :edit, :update, :destroy]
+  before_action :set_van, only: [:show, :edit, :update, :destroy]
+
+  skip_before_action :authenticate_user!, only: :index
 
   def index
     @vans = Van.all
@@ -22,8 +24,7 @@ class VansController < ApplicationController
   end
 
   def update
-    @van.udpate(van_params)
-    if @van.save
+    if @van.update(van_params)
       redirect_to van_path(@van)
     else
       render :edit
@@ -46,4 +47,5 @@ class VansController < ApplicationController
 
   def set_van
     @van = Van.find(params[:id])
+  end
 end
