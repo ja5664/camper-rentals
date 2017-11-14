@@ -1,11 +1,11 @@
 class VanPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope
+      scope.all
     end
 
     def create?
-      record.user == user
+      return true
     end
 
     def update?

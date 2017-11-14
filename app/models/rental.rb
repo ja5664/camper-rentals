@@ -5,3 +5,4 @@ class Rental < ApplicationRecord
 
   validates :start_date, :end_date, :photo, :price, :status, presence: true
 end
+
