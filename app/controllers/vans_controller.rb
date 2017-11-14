@@ -6,12 +6,12 @@ class VansController < ApplicationController
   end
 
   def new
-    # authorize @van
+    authorize @van
     @van = Van.new
   end
 
   def create
-    # authorize @van
+    authorize @van
     @van = Van.new(van_params)
     if @van.save
       redirect_to van_path(@van)
@@ -21,11 +21,11 @@ class VansController < ApplicationController
   end
 
   def edit
-    # authorize @van
+    authorize @van
   end
 
   def update
-    # authorize @van
+    authorize @van
     if @van.update(van_params)
       redirect_to van_path(@van)
     else
@@ -37,7 +37,7 @@ class VansController < ApplicationController
   end
 
   def destroy
-    # authorize @van
+    authorize @van
     @van.destroy
     redirect_to vans_path
   end
