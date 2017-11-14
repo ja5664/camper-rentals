@@ -1,3 +1,3 @@
 class Review < ApplicationRecord
-  belongs_to :rental
+  validates :score, :description, :photo, presence: true
 end
