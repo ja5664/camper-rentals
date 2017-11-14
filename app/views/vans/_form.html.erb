@@ -1,0 +1,12 @@
+<%= simple_form_for(@van) do |v| %>
+  <%= v.input :location %>
+  <%= v.input :description %>
+  <%= v.input :price %>
+  <%= v.input :make %>
+  <%= v.input :model %>
+  <%= v.input :bed %>
+  <%= v.input :sleep %>
+  <%= v.input :bathroom %>
+  <%= v.input :kitchen %>
+  <%= v.submit "Submit", class: "btn btn-default" %>
+<% end %>

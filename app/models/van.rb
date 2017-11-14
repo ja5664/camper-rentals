@@ -4,3 +4,4 @@ class Van < ApplicationRecord
 
   validates :location, :availability, :description, :photo, :make, :model, :bed, :sleep, :bathroom, :kitchen, :price, presence: true
 end
+

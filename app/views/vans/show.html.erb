@@ -1,34 +1,19 @@
 <div class="display">
-<!-- //  <%= @van.model %>
+  <%= @van.model %>
   <%= @van.user.email %>
   <%= @van.reviews %>
 
   <%= # simple_form_for [@van, @rental] do |f| %>
     <%# f.input .... %>
-  <%# end %> -->
+  <%# end %>
 
-  <!-- Rental Details -->
-  <div class="rental_details">
-    <!-- Some code here -->
-  </div>
+  <%= @van.description %>
 
-  <!-- Description -->
-  <div class="description">
-    <!-- Some code here -->
-  </div>
+  <% if policy(@van).edit? %>
+    <%= link_to "Edit Van", edit_van_path(@van) %>
+  <% end %>
 
-  <!-- Booking Form -->
-  <div class="new_rental_form">
-    <!-- Some code here -->
-  </div>
-
-  <!-- Reviews -->
-  <div class="reviews">
-    <!-- Some code here -->
-  </div>
-
-  <!-- Photo Gallery -->
-  <div class="photos">
-    <!-- Some code here -->
-  </div>
+  <% if policy(@van).destroy? %>
+    <%= link_to "Delete Van", van_path(@van), method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
+  <% end %>
 </div>
