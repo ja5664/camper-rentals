@@ -40,14 +40,19 @@
 
   <!-- Reviews -->
   <div class="reviews spacing">
-    <h5><strong>REVIEWS</strong></h5>
-    <i class="fa fa-star" aria-hidden="true"></i>
-    <i class="fa fa-star" aria-hidden="true"></i>
-    <i class="fa fa-star" aria-hidden="true"></i>
-    <i class="fa fa-star-o" aria-hidden="true"></i>
-    <i class="fa fa-star-o" aria-hidden="true"></i>
+    <ul>
+      <% @van.reviews.each do |review| %>
+        <li><strong><%= review.description %></strong></li>
+          <% review.score.times do %>
+            <i class="fa fa-star"></i>
+          <% end %>
+          <% (5 - review.score).times do %>
+            <i class="fa fa-star-o"></i>
+          <% end %>
+        <% end %>
+    </ul>
   </div>
-</div>
+
 
 <div class="link">
   <!-- Edit Van -->
