@@ -1,5 +1,9 @@
 // CSS for Vans show page //
 
+table tc .icon {
+  width: 100px;
+}
+
 .title {
   padding-left: 30px;
 }
@@ -17,9 +21,13 @@
   border: 1px solid black;
 }
 
-.location {
+.details {
   border: 1px solid black;
   grid-column: 2 / span 1;
+
+  ul-inline {
+    list-style: none;
+  }
 }
 
 .booking-form {
