@@ -2,18 +2,8 @@
 
 <ul>
   <% @vans.each do |van| %>
-    <li>
-      <%= van.photo %>
-      <%= van.description %>
-      <%= van.price %>
-      <%= van.location %>
-      <%= van.availability %>
-      <%= van.make %>
-      <%= van.model %>
-      <%= van.bed %>
-      <%= van.sleep %>
-      <%= van.bathroom %>
-      <%= van.kitchen %>
-    </li>
+    <li><%= link_to van.description, van_path(van) %></li>
   <% end %>
 </ul>
+
+<%= link_to "Add new van", new_van_path %>
