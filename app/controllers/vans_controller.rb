@@ -13,6 +13,7 @@ class VansController < ApplicationController
 
   def create
     @van = Van.new(van_params)
+    @van.user = current_user
     authorize @van
     if @van.save
       redirect_to van_path(@van)

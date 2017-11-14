@@ -2,7 +2,7 @@
 
 <ul>
   <% @vans.each do |van| %>
-    <li><%= van.description %></li>
+    <li><%= link_to van.description, van_path(van) %></li>
   <% end %>
 </ul>
 

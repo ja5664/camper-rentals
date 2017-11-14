@@ -1,8 +1,9 @@
 <%= @van.description %>
 
-<% if policy(Van).edit? %>
+<% if policy(@van).edit? %>
   <%= link_to "Edit Van", edit_van_path(@van) %>
 <% end %>
-<% if policy(Van).edit? %>
+
+<% if policy(@van).destroy? %>
   <%= link_to "Delete Van", van_path(@van), method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
 <% end %>
