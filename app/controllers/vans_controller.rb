@@ -1,6 +1,5 @@
 class VansController < ApplicationController
   before_action :set_van, only: [:show, :edit, :update, :destroy]
-
   skip_before_action :authenticate_user!, only: [:index, :new, :create]
 
   def index
