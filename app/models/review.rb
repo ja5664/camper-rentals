@@ -1,3 +1,3 @@
 class Review < ApplicationRecord
-  validates :score, :description, :photo, presence: true
+  validates :score, :description, presence: true
 end
