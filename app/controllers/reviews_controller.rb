@@ -1,20 +1,28 @@
 class ReviewsController < ApplicationController
   before_action :set_van, only: [:new, :create]
 
+
   def new
     @review = Review.new
     authorize @review
+    # @review.van_id = @van.id
   end
 
   def create
     @review = Review.new(review_params)
-    @review.van = @van
+    @review.van_id = @van.id
+    @review.user_id = current_user.id
     authorize @review
     if @review.save
       redirect_to van_path(@van)
     else
       render :new
     end
+  end
+
+  def show
+    @review = Review.find(params[:id])
+    authorize @review
   end
 
   def edit

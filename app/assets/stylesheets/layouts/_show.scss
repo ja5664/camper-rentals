@@ -1,0 +1,48 @@
+// CSS for Vans show page //
+
+table tc .icon {
+  width: 100px;
+}
+
+.title {
+  padding-left: 30px;
+}
+
+.display {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  height: calc(100vh - 150px);
+  width: 97%;
+  margin: auto;
+}
+
+.description {
+  border: 1px solid black;
+}
+
+.details {
+  border: 1px solid black;
+  grid-column: 2 / span 1;
+
+  ul-inline {
+    list-style: none;
+  }
+}
+
+.booking-form {
+  border: 1px solid black;
+  grid-column: 3 / span 1;
+  grid-row: 1 / span 2;
+}
+
+.reviews {
+  border: 1px solid black;
+  grid-row: 2 / span 1;
+  grid-column: 1 / span 2;
+}
+
+.spacing {
+  margin: 20px;
+  padding: 20px;
+}
