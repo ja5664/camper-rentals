@@ -61,6 +61,7 @@ puts ""
     })
   puts "#{make} has been added to the db"
 }
+
 puts ""
 puts "van seeding completed"
 puts ""
@@ -94,7 +95,7 @@ puts "creating 5 rentals"
 puts ""
 
 5.times {
-  score = ([1..5].to_a).sample
+  score = ((1..5).to_a).sample
   verb = ["terrible", "poor", "so so", "good", "amazing"]
   verb2 = ["rusty", "tired", "good enough", "so comfy", "super cool"]
   description = "I rented this van and had a #{verb} time. The van itself was #{verb2}"
