@@ -1,5 +1,8 @@
 class Rental < ApplicationRecord
   belongs_to :user
   belongs_to :van
-  validates :rental, :location, :description, :photo, :make, :model, :bed, :sleep, :bathroom, :kitchen, :price, presence: true
+  belongs_to :review
+
+  validates :start_date, :end_date, :photo, :price, :status, presence: true
 end
+
