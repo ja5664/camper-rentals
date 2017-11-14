@@ -17,7 +17,7 @@ gem 'uglifier'
 gem 'webpacker'
 gem 'devise'
 gem 'pundit'
-gem 'faker'
+gem 'faker' # for seeding
 
 group :development, :test do
   gem 'pry-byebug'
