@@ -1,15 +1,17 @@
 class VansController < ApplicationController
-  before_action :set_van, only [:show, :edit, :update, :destroy]
+  before_action :set_van, only: [:show, :edit, :update, :destroy]
 
   def index
     @vans = Van.all
   end
 
   def new
+    authorize @van
     @van = Van.new
   end
 
   def create
+    authorize @van
     @van = Van.new(van_params)
     if @van.save
       redirect_to van_path(@van)
@@ -19,11 +21,12 @@ class VansController < ApplicationController
   end
 
   def edit
+    authorize @van
   end
 
   def update
-    @van.udpate(van_params)
-    if @van.save
+    authorize @van
+    if @van.update(van_params)
       redirect_to van_path(@van)
     else
       render :edit
@@ -34,6 +37,7 @@ class VansController < ApplicationController
   end
 
   def destroy
+    authorize @van
     @van.destroy
     redirect_to vans_path
   end
@@ -46,4 +50,5 @@ class VansController < ApplicationController
 
   def set_van
     @van = Van.find(params[:id])
+  end
 end
