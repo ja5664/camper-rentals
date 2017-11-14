@@ -1,0 +1,19 @@
+<h1>All Vans</h1>
+
+<ul>
+  <% @vans.each do |van| %>
+    <li>
+      <%= van.photo %>
+      <%= van.description %>
+      <%= van.price %>
+      <%= van.location %>
+      <%= van.availability %>
+      <%= van.make %>
+      <%= van.model %>
+      <%= van.bed %>
+      <%= van.sleep %>
+      <%= van.bathroom %>
+      <%= van.kitchen %>
+    </li>
+  <% end %>
+</ul>
