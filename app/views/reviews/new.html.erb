@@ -1,0 +1,8 @@
+<h1>New review</h1>
+
+<%= simple_form_for [@van, @review] do |f| %>
+  <%= f.input :score %>
+  <%= f.input :description %>
+  <%# f.input :photo %>
+  <%= f.submit class: 'btn btn-primary' %>
+<% end %>
