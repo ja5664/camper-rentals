@@ -8,7 +8,7 @@
     <h5><strong>Description</strong></h5>
     <p><%= @van.description %></p>
     <br>
-    <ul>
+    <ul-inline>
       <li><i class="fa fa-bus" aria-hidden="true"></i> <%= @van.make %> <%= @van.model %></li>
       <li><i class="fa fa-bed" aria-hidden="true"></i> <%= @van.bed %> bed(s) | <%= @van.sleep %> people</li>
       <li>
@@ -19,6 +19,26 @@
         <i class="fa fa-fire" aria-hidden="true"></i>
         <%= @van.kitchen ? "Kitchen included" : "Kitchen not included" %></li>
     </ul>
+
+<hr>
+    <!-- Table testing -->
+
+    <table>
+      <thead>
+      </thead>
+
+      <tbody>
+        <td>
+          <tc><i class="fa fa-bed" aria-hidden="true"></i></tc>
+          <tc>hello 1</tc>
+        </td>
+        <tr>
+          <tc><i class="fa fa-bath" aria-hidden="true"></i></tc>
+          <tc>hello 2</tc>
+        </tr>
+      </tbody>
+    </table>
+
   </div>
 
   <!-- Location -->

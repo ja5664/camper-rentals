@@ -17,6 +17,10 @@
   border: 1px solid black;
 }
 
+.description ul-inline {
+  list-style: none;
+}
+
 .location {
   border: 1px solid black;
   grid-column: 2 / span 1;
