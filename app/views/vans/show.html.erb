@@ -49,8 +49,10 @@
           <% (5 - review.score).times do %>
             <i class="fa fa-star-o"></i>
           <% end %>
+          <%= link_to "View Review", review %>
         <% end %>
     </ul>
+    <%= link_to "Add new review", new_van_review_path(@van) %>
   </div>
 
 
