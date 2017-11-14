@@ -33,7 +33,7 @@ class RentalsController < ApplicationController
   def update
     authorize @rental
     if @rental.update(rental_path)
-      redierct_to rental_path(@rental)
+      redirect_to rental_path(@rental)
     else
       render :edit
     end

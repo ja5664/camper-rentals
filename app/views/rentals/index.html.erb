@@ -1,7 +1,7 @@
 <h1> Your Rentals!!! </h1>
 <% @rentals.each do |rental| %>
   <p>
-    Start date:<%= rental.start_date %> End date:<%= rental.end_date %>
+    Start date:<%= rental.start_date.strftime("%m/%d/%Y") %> End date:<%= rental.end_date.strftime("%m/%d/%Y") %>
   </p>
   <p>Price:<%= rental.price %></p>
 <% end %>
