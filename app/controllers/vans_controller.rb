@@ -7,6 +7,10 @@ class VansController < ApplicationController
     @vans = Van.all
   end
 
+  def show
+    @rental = Rental.new
+  end
+
   def new
     @van = Van.new
   end
@@ -29,9 +33,6 @@ class VansController < ApplicationController
     else
       render :edit
     end
-  end
-
-  def show
   end
 
   def destroy

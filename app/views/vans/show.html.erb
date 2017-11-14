@@ -1,27 +1,34 @@
 <div class="display">
+<!-- //  <%= @van.model %>
+  <%= @van.user.email %>
+  <%= @van.reviews %>
+
+  <%= # simple_form_for [@van, @rental] do |f| %>
+    <%# f.input .... %>
+  <%# end %> -->
 
   <!-- Rental Details -->
-  <div class="rental_details" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3)), url(<%= cl_image_path van.photo %>)";>
+  <div class="rental_details">
     <!-- Some code here -->
   </div>
 
   <!-- Description -->
-  <div class="description" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3)), url(<%= cl_image_path van.photo %>)";>
+  <div class="description">
     <!-- Some code here -->
   </div>
 
   <!-- Booking Form -->
-  <div class="booking_form" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3)), url(<%= cl_image_path van.photo %>)";>
+  <div class="new_rental_form">
     <!-- Some code here -->
   </div>
 
   <!-- Reviews -->
-  <div class="reviews" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3)), url(<%= cl_image_path van.photo %>)";>
+  <div class="reviews">
     <!-- Some code here -->
   </div>
 
   <!-- Photo Gallery -->
-  <div class="photos" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3)), url(<%= cl_image_path van.photo %>)";>
+  <div class="photos">
     <!-- Some code here -->
   </div>
 </div>
