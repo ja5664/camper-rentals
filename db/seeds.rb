@@ -61,6 +61,7 @@ puts ""
     })
   puts "#{make} has been added to the db"
 }
+
 puts ""
 puts "van seeding completed"
 puts ""
