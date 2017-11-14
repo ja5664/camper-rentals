@@ -42,7 +42,7 @@ class RentalsController < ApplicationController
   def destroy
     authorize @rental
     @rental.destroy
-    redirect_to rental_path
+    redirect_to root_path
   end
 
   private
