@@ -1,0 +1,31 @@
+.cards {
+  height: calc(100vh - 50px)
+}
+
+.card {
+  height: 200px;
+  background-position: center;
+  background-size: cover;
+  margin-bottom: 30px;
+}
+
+.card-body {
+  opacity: 0;
+  padding: 10px;
+  background-color: rgba(0,0,0,0.2);
+  height: 100%;
+}
+
+.card-body:hover {
+  opacity: 1;
+}
+
+.card-link {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  z-index: 2;
+  opacity: 0;
+}
