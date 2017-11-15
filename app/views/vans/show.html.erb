@@ -1,5 +1,18 @@
-<div class="title">
+<div class="title padding">
   <h3><%= @van.make %> <%= @van.model %></h3>
+</div>
+
+<div class="link padding">
+  <!-- Display All Vans -->
+  <%= link_to "BACK TO RESULTS", vans_path %>
+  <!-- Edit Van -->
+  <% if policy(@van).edit? %>
+    | <%= link_to "EDIT", edit_van_path(@van) %> |
+  <% end %>
+  <!-- Delete Van -->
+  <% if policy(@van).destroy? %>
+    <%= link_to "DELETE", van_path(@van), method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
+  <% end %>
 </div>
 
 <div class="display">
@@ -67,19 +80,5 @@
     </ul>
 
   </div>
-
-
-<div class="link">
-  <!-- Display All Vans -->
-  <%= link_to "BACK TO RESULTS", vans_path %>
-  <!-- Edit Van -->
-  <% if policy(@van).edit? %>
-    | <%= link_to "EDIT", edit_van_path(@van) %> |
-  <% end %>
-  <!-- Delete Van -->
-  <% if policy(@van).destroy? %>
-    <%= link_to "DELETE", van_path(@van), method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
-  <% end %>
-</div>
 
 <%= content_for(:title, @van.model) %>
