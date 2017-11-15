@@ -7,7 +7,7 @@ class Van < ApplicationRecord
   mount_uploader :photo, PhotoUploader
 
   # Enables geocoder
-  geocoded_by :address
-  after_validation :geocode, if: :address_changed?
+  geocoded_by :location
+  after_validation :geocode, if: :location_changed?
 end
 
