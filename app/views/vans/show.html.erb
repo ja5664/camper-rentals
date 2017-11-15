@@ -1,5 +1,8 @@
 <div class="title padding">
-  <h3><%= @van.make %> <%= @van.model %></h3>
+  <h3>
+    <%= @van.make.upcase %> <%= @van.model.upcase %>
+    <%= link_to "BOOK", new_van_rental_path(@van),class: "btn btn-default" %>
+  </h3>
 </div>
 
 <div class="link padding">
@@ -33,7 +36,6 @@
     <br>
     <h5><strong>DETAILS</strong></h5>
     <ul-inline>
-      <li><i class="fa fa-bus" aria-hidden="true"></i> <%= @van.make %> <%= @van.model %></li>
       <li><i class="fa fa-bed" aria-hidden="true"></i> <%= @van.bed %> bed(s) | <%= @van.sleep %> person(s)</li>
       <li>
         <i class="fa fa-bath" aria-hidden="true"></i>
@@ -45,12 +47,9 @@
     </ul>
   </div>
 
-  <!-- Booking Form -->
-  <div class="booking-form spacing">
-    <h5><strong>BOOKING FORM</strong></h5>
-
-    <p>This is a booking form request.</p>
-    <%= link_to "Book a van", new_van_rental_path(@van),class: "btn btn-default" %>
+  <!-- Additional Space (currently displaying image) -->
+  <% photo_url = @van.photo? ? @van.photo : 'lix2bqmp4kzdpu4sqjiy' %>
+  <div class="image spacing" style="background-image: url(<%= cl_image_path photo_url %>)">
   </div>
 
   <!-- Reviews -->

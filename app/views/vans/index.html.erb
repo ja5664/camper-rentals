@@ -4,8 +4,9 @@
       <!-- Photo exists on seed/Cloudinary -->
     <div class="card" style="background-image: url(<%= cl_image_path photo_url %>);">
       <div class="card-body">
-        <h5><%= van.make %> <%= van.model %></h5>
-        <h5>£<%= van.price %></h5>
+        <h4><%= van.make %></h4>
+        <h6><light><%= van.location %></light></h6>
+        <h6><light>£<%= van.price %></light></h6>
         <%= link_to "", van_path(van), class: "card-link" %>
       </div>
     </div>
