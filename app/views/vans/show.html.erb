@@ -6,7 +6,7 @@
     <div class="booking">
       <h1><%= @van.make.upcase %> <%= @van.model.upcase %></h1>
       <h4><%= @van.description %></h4>
-      <h6>£<%= @van.price %></h6>
+      <h6>£<%= number_with_delimiter(@van.price) %></h6>
       <h3><%= link_to "BOOK", new_van_rental_path(@van),class: "btn btn-default" %></h3>
     </div>
   </div>
@@ -25,13 +25,14 @@
     <br>
     <h5><strong>DETAILS</strong></h5>
     <ul-inline>
-      <li><i class="fa fa-bed" aria-hidden="true"></i> <%= @van.bed %> bed(s) | <%= @van.sleep %> person(s)</li>
+      <li><i class="fa fa-bed" aria-hidden="true"></i>&nbsp
+        <%= @van.bed %> bed(s) | <%= @van.sleep %> person(s)</li>
       <li>
-        <i class="fa fa-bath" aria-hidden="true"></i>
+        <i class="fa fa-bath" aria-hidden="true"></i>&nbsp
         <%= @van.bathroom ? "Bathroom included" : "Bathroom not included" %>
       </li>
       <li>
-        <i class="fa fa-fire" aria-hidden="true"></i>
+        <i class="fa fa-fire" aria-hidden="true"></i>&nbsp
         <%= @van.kitchen ? "Kitchen included" : "Kitchen not included" %></li>
     </ul>
   </div>
@@ -39,15 +40,22 @@
   <!-- Reviews -->
   <div class="reviews spacing">
     <h5>
-      <strong>REVIEWS</strong>
-      (<%= @van.reviews.count %> reviews)
-    <!-- Average reviews -->
-    <%= link_to new_van_review_path(@van) do %>
-      <i class="fa fa-plus" aria-hidden="true"></i>
-    <% end %>
+      <strong>REVIEWS</strong>&nbsp
+      <% if @van.reviews.count == 1 %>
+        (<%= @van.reviews.count %> review)
+      <% else %>
+        (<%= @van.reviews.count %> reviews)
+      <% end %>
+      &nbsp
+      <!-- Add Reviews -->
+      <%= link_to new_van_review_path(@van) do %>
+        <i class="fa fa-plus" aria-hidden="true"></i>
+      <% end %>
     </h5>
     <!-- Listing of last three individual reviews -->
-    <ul-inline>
+
+<!-- ORIGINAL -->
+<!-- <ul-inline>
       <% @van.reviews.last(3).each do |review| %>
         <li>
           <% review.score.times do %>
@@ -57,10 +65,51 @@
             <i class="fa fa-star-o"></i>
           <% end %>
           <%= review.description %>
-          <%= link_to "VIEW", review %>
         </li>
         <% end %>
-    </ul>
+    </ul-inline> -->
+
+    <!-- Pop Up Test -->
+
+    <ul-inline>
+      <% @van.reviews.last(3).each do |review| %>
+        <li>
+          <% review.score.times do %>
+            <i class="fa fa-star"></i>
+          <% end %>
+          <% (5 - review.score).times do %>
+            <i class="fa fa-star-o"></i>
+          <% end %>
+          - <%= review.user_id %> | <%= review.created_at.strftime("%d %b %Y") %> &nbsp
+          <!-- Pop Up "Link" -->
+          <div class="popup" onclick="myFunction()">
+            <div class="icon"><i class="fa fa-search" aria-hidden="true"></i></div>
+            <!-- Pop Up Display -->
+            <span class="popuptext" id="popup-display">
+              <p>
+                <% review.score.times do %>
+                  <i class="fa fa-star"></i>
+                <% end %>
+                <% (5 - review.score).times do %>
+                  <i class="fa fa-star-o"></i>
+                <% end %>
+              </p>
+              <p><%= review.description %></p>
+              <p><%= cl_image_tag review.photo %></p>
+            </span>
+            </div>
+        </li>
+      <% end %>
+    </ul-inline>
+    <!-- Pop Up JavaScript -->
+    <%= content_for(:after_js) do %>
+      <script>
+        function myFunction() {
+          var popup = document.getElementById("popup-display");
+          popup.classList.toggle("show");
+        }
+      </script>
+    <% end %>
   </div>
 </div>
 
