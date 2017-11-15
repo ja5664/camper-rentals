@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>New review for <%= @van.model %></h1>
+  <h1>New review for <%= @van.make %> <%= @van.model %></h1>
 
   <%= simple_form_for [@van, @review] do |f| %>
     <%= f.input :score, collection: 1..5 %>
