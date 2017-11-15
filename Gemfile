@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 ruby '2.3.5'
 
 gem 'figaro'
+gem 'cloudinary'
 gem 'jbuilder', '~> 2.0'
 gem 'pg'
 gem 'puma'
@@ -18,6 +19,7 @@ gem 'webpacker'
 gem 'devise'
 gem 'pundit'
 gem 'faker' # for seeding
+gem 'carrierwave', '~> 1.2'
 
 group :development, :test do
   gem 'pry-byebug'

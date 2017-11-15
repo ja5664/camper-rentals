@@ -1,0 +1,32 @@
+<h1>Here are the details of your rental</h1>
+
+<p>Rental start date: <%= @rental.start_date.strftime("%m/%d/%Y") %>
+<p>Rental end date: <%= @rental.end_date.strftime("%m/%d/%Y") %>
+<p>Your rental is: <%= @rental.status %>
+<p>Total price of the rental: <%= @rental.price %>
+
+<hr>
+
+<p><%= @renter.first_name %> you are renting from <%= @owner.first_name %></p>
+
+<hr>
+
+<h2>The details of <%= @owner.first_name %>'s van</h2>
+
+<p>It has <%= @van.bed %>beds</p>
+
+<div class="photo">
+  <%= image_tag @rental.photo %>
+</div>
+
+<div class="photo">
+  <%= image_tag @van.photo %>
+</div>
+
+<% if policy(@rental).edit? %>
+  <%= link_to "Edit Rental", edit_rental_path(@rental) %>
+<% end %>
+
+<% if policy(@rental).destroy? %>
+  <%= link_to "Delete Rental", rental_path(@rental), method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
+<% end %>

@@ -6,6 +6,11 @@ class VansController < ApplicationController
     @vans = policy_scope(Van).order(created_at: :desc)
   end
 
+  def show
+    authorize @van
+    @rental = Rental.new
+  end
+
   def new
     @van = Van.new
     authorize @van
@@ -33,10 +38,6 @@ class VansController < ApplicationController
     else
       render :edit
     end
-  end
-
-  def show
-    authorize @van
   end
 
   def destroy

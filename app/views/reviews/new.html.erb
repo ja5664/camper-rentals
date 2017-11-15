@@ -1,8 +1,12 @@
-<h1>New review</h1>
+<div class="container">
+  <h1>New review for Van-owner - <%= @van.user_id %></h1>
 
-<%= simple_form_for [@van, @review] do |f| %>
-  <%= f.input :score %>
-  <%= f.input :description %>
-  <%# f.input :photo %>
-  <%= f.submit class: 'btn btn-primary' %>
-<% end %>
+  <%= simple_form_for [@van, @review] do |f| %>
+    <%= f.input :score, collection: 1..5 %>
+    <%= f.input :description %>
+    <%= f.input :photo %>
+    <%= f.input :photo_cache, as: :hidden %>
+
+    <%= f.submit class: 'btn btn-primary' %>
+  <% end %>
+</div>
