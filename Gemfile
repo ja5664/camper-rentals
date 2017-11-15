@@ -19,6 +19,7 @@ gem 'webpacker'
 gem 'devise'
 gem 'pundit'
 gem 'faker' # for seeding
+gem 'carrierwave', '~> 1.2'
 
 group :development, :test do
   gem 'pry-byebug'
