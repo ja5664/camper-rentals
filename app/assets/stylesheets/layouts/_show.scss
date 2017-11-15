@@ -5,6 +5,7 @@
 
 .link {
   font-size: 14px;
+  text-align: center;
 }
 
 .display {
@@ -14,6 +15,7 @@
   height: calc(100vh - 150px);
   width: 97%;
   margin: auto;
+  padding-top: 5px;
 }
 
 .description {
@@ -26,14 +28,27 @@
 
   ul-inline {
     list-style: none;
+    font-size: 16px;
   }
 }
 
 .image {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
   grid-column: 1 / span 3;
   grid-row: 1 / span 1;
   background-position: center;
   background-size: cover;
+
+  .booking {
+    text-align: center;
+    color: white;
+
+    h1, h3 {
+      margin-top: 0px;
+    }
+  }
 }
 
 .reviews {
@@ -42,6 +57,7 @@
 
   ul-inline {
     list-style: none;
+    font-size: 16px;
   }
 }
 
