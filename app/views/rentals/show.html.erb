@@ -38,3 +38,5 @@
 <% if policy(@rental).destroy? %>
   <%= link_to "Delete Rental", rental_path(@rental), method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
 <% end %>
+
+<%= content_for(:title, 'Le Campeur') %>

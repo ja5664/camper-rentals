@@ -1,4 +1,4 @@
-<h2>Add New Van</h2>
+<h2>Add a new van</h2>
 
 <%= render "form", van: @van %>
 
@@ -7,3 +7,5 @@
 <%= link_to vans_path do %>
   <i class="fa fa-undo" aria-hidden="true"></i> Back to List
 <% end %>
+
+<%= content_for(:title, 'Add new van - Le Campeur') %>

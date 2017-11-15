@@ -57,6 +57,8 @@
 
 
 <div class="link">
+  <!-- Display All Vans -->
+  <%= link_to "Back to Results", vans_path %>
   <!-- Edit Van -->
   <% if policy(@van).edit? %>
     <%= link_to "Edit Van", edit_van_path(@van) %>
