@@ -40,32 +40,43 @@
 
   <!-- Reviews -->
   <div class="reviews spacing">
-    <ul>
-      <% @van.reviews.each do |review| %>
-        <li><strong><%= review.description %></strong></li>
+    <h5>
+      <strong>REVIEWS</strong>
+      (<%= @van.reviews.count %> reviews)
+    <!-- Average reviews -->
+    <%= link_to new_van_review_path(@van) do %>
+      <i class="fa fa-plus" aria-hidden="true"></i>
+    <% end %>
+    </h5>
+    <!-- Listing of last three individual reviews -->
+    <ul-inline>
+      <% @van.reviews.last(3).each do |review| %>
+        <li>
           <% review.score.times do %>
             <i class="fa fa-star"></i>
           <% end %>
           <% (5 - review.score).times do %>
             <i class="fa fa-star-o"></i>
           <% end %>
-          <%= link_to "View Review", review %>
+          <%= review.description %>
+          <%= link_to "VIEW", review %>
+        </li>
         <% end %>
     </ul>
-    <%= link_to "Add new review", new_van_review_path(@van) %>
+
   </div>
 
 
 <div class="link">
   <!-- Display All Vans -->
-  <%= link_to "Back to Results", vans_path %>
+  <%= link_to "BACK TO RESULTS", vans_path %>
   <!-- Edit Van -->
   <% if policy(@van).edit? %>
-    <%= link_to "Edit Van", edit_van_path(@van) %>
+    | <%= link_to "EDIT", edit_van_path(@van) %> |
   <% end %>
   <!-- Delete Van -->
   <% if policy(@van).destroy? %>
-    <%= link_to "Delete Van", van_path(@van), method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
+    <%= link_to "DELETE", van_path(@van), method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
   <% end %>
 </div>
 
