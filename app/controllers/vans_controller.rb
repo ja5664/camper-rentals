@@ -49,7 +49,7 @@ class VansController < ApplicationController
   private
 
   def van_params
-    params.require(:van).permit(:location, :availability, :description, :photo, :make, :model, :bed, :sleep, :bathroom, :kitchen, :price)
+    params.require(:van).permit(:location, :availability, :description, :make, :model, :bed, :sleep, :bathroom, :kitchen, :price, :photo)
   end
 
   def set_van
