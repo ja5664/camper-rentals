@@ -23,6 +23,13 @@ gem 'devise'
 gem 'pundit'
 gem 'faker' # for seeding
 gem 'carrierwave', '~> 1.2'
+gem 'geocoder'
+gem 'coffee-rails'
+gem 'gmaps4rails'
+
+source 'https://rails-assets.org' do
+  gem "rails-assets-underscore"
+end
 
 group :development, :test do
   gem 'pry-byebug'
