@@ -1,32 +1,16 @@
 
-<% if user_signed_in? %>
-  <%= link_to "Add New Van", new_van_path %>
-<% end %>
+
 <div class="cards">
   <% @vans.each do |van| %>
-    <% if van.photo? %>
+    <% photo_url = van.photo? ? van.photo : 'lix2bqmp4kzdpu4sqjiy' %>
       <!-- Photo exists on seed/Cloudinary -->
-      <div class="col-xs-12 col-sm-3">
-        <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= cl_image_path van.photo %>);">
-          <div class="card-body">
-            <h5><%= van.make %> <%= van.model %></h5>
-            <h5>£<%= van.price %></h5>
-            <%= link_to "", van_path(van), class: "card-link" %>
-          </div>
-        </div>
+    <div class="card" style="background-image: url(<%= cl_image_path photo_url %>);">
+      <div class="card-body">
+        <h5><%= van.make %> <%= van.model %></h5>
+        <h5>£<%= van.price %></h5>
+        <%= link_to "", van_path(van), class: "card-link" %>
       </div>
-    <% else %>
-      <!-- Photo doesn't exist -->
-      <div class="col-xs-12 col-sm-3">
-        <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= cl_image_path 'lix2bqmp4kzdpu4sqjiy' %>);">
-          <div class="card-body">
-            <h5><%= van.make %> <%= van.model %></h5>
-            <h5>£<%= van.price %></h5>
-            <%= link_to "", van_path(van), class: "card-link" %>
-          </div>
-        </div>
-      </div>
-    <% end %>
+    </div>
   <% end %>
 </div>
 
