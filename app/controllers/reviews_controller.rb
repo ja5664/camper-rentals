@@ -5,7 +5,6 @@ class ReviewsController < ApplicationController
   def new
     @review = Review.new
     authorize @review
-    # @review.van_id = @van.id
   end
 
   def create

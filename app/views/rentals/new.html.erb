@@ -1,0 +1,17 @@
+<div class="container">
+  <h2>Add New Rental</h2>
+
+  <%= simple_form_for [@van, @rental] do |r| %>
+    <%= r.input :start_date %>
+    <%= r.input :end_date %>
+    <%= r.submit "Submit", class: "btn btn-default" %>
+  <% end %>
+
+  <hr>
+
+  <%= link_to van_rentals_path do %>
+    <i class="fa fa-undo" aria-hidden="true"></i> Back to List
+  <% end %>
+
+  <%= content_for(:title, 'New rental - Le Campeur') %>
+</div>
