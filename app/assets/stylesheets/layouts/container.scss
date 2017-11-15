@@ -1,4 +1,4 @@
-.rentals-container{
+.rentals-container {
   background-color: $light-gray;
   width: 50%;
   border-radius: 5px;
@@ -11,4 +11,8 @@
   color: $gray !important;
   padding-top: 50px;
   font-size: 16px !important;
+}
+
+.container {
+  width: 50%;
 }
