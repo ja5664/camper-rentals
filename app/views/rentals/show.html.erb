@@ -1,35 +1,22 @@
 
-<div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('https://kitt.lewagon.com/placeholder/cities/berlin');">
+<div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('http://res.cloudinary.com/joycelewagon/image/upload/v1510750617/hfxsxwnvfij3w15mvccl.jpg');">
   <div class="banner-content">
-    <h1>confirmed</h1>
+    <h1>Confirmed</h1>
   </div>
 </div>
 
-
 <h1>Here are the details of your rental</h1>
+
+<p><%= @renter.first_name %> you are renting from <%= @owner.first_name %></p>
 
 <p>Rental start date: <%= @rental.start_date.strftime("%m/%d/%Y") %>
 <p>Rental end date: <%= @rental.end_date.strftime("%m/%d/%Y") %>
 <p>Your rental is: <%= @rental.status %>
 <p>Total price of the rental: <%= @rental.price %>
 
-<hr>
-
-<p><%= @renter.first_name %> you are renting from <%= @owner.first_name %></p>
-
-<hr>
-
 <h2>The details of <%= @owner.first_name %>'s van</h2>
 
 <p>It has <%= @van.bed %>beds</p>
-
-<div class="photo">
-  <%= image_tag @rental.photo %>
-</div>
-
-<div class="photo">
-  <%= image_tag @van.photo %>
-</div>
 
 <% if policy(@rental).edit? %>
   <%= link_to "Edit Rental", edit_rental_path(@rental) %>
