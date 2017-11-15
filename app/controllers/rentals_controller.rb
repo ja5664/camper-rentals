@@ -13,6 +13,8 @@ class RentalsController < ApplicationController
 
   def create
     @rental = Rental.new(rental_params)
+    @rental.van = @van
+    @rental.user = current_user
     authorize @rental
     # binding.pry
     if @rental.save
