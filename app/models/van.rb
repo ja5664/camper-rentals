@@ -5,5 +5,6 @@ class Van < ApplicationRecord
   validates :location, :description, :photo, :make, :model, :bed, :sleep, :price, presence: true
 
   mount_uploader :photo, PhotoUploader
+  # has_attachments :photos
 end
 
