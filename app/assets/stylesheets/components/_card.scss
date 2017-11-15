@@ -1,22 +1,27 @@
 .cards {
-  height: calc(100vh - 50px)
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .card {
+  position: relative;
   height: 200px;
+  flex: 0 0 25%;
   background-position: center;
   background-size: cover;
-  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .card-body {
   opacity: 0;
   padding: 10px;
-  background-color: rgba(0,0,0,0.2);
-  height: 100%;
+  color: white;
+  transition: .5s;
 }
 
-.card-body:hover {
+.card:hover .card-body{
   opacity: 1;
 }
 
@@ -27,5 +32,6 @@
   right: 0;
   width: 100%;
   z-index: 2;
-  opacity: 0;
+  opacity: 0.3;
+  background-color: black;
 }
