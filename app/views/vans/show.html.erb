@@ -47,10 +47,12 @@
         (<%= @van.reviews.count %> reviews)
       <% end %>
       &nbsp
-      <!-- Add Reviews -->
-      <%= link_to new_van_review_path(@van) do %>
-        <i class="fa fa-plus" aria-hidden="true"></i>
-      <% end %>
+      <div class="link">
+        <!-- Add Reviews -->
+        <%= link_to "ADD", new_van_review_path(@van) %> &nbsp|&nbsp
+        <!-- List All Reviews for Van -->
+        <%= link_to "SHOW ALL", review_path(@van) %>
+      </div>
     </h5>
     <!-- Listing of last three individual reviews -->
 
@@ -118,7 +120,7 @@
   <%= link_to "BACK TO RESULTS", vans_path %>
   <!-- Edit Van -->
   <% if policy(@van).edit? %>
-    | <%= link_to "EDIT", edit_van_path(@van) %> |
+    &nbsp|&nbsp <%= link_to "EDIT", edit_van_path(@van) %> &nbsp|&nbsp
   <% end %>
   <!-- Delete Van -->
   <% if policy(@van).destroy? %>
