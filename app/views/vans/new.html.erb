@@ -1,11 +1,13 @@
-<h2>Add a new van</h2>
+<div class="container">
+  <h2>Add a new van</h2>
 
-<%= render "form", van: @van %>
+    <%= render "form", van: @van %>
 
-<hr>
+  <hr>
 
-<%= link_to vans_path do %>
-  <i class="fa fa-undo" aria-hidden="true"></i> Back to List
-<% end %>
+  <%= link_to vans_path do %>
+    <i class="fa fa-undo" aria-hidden="true"></i> Back to List
+  <% end %>
 
-<%= content_for(:title, 'Add new van - Le Campeur') %>
+  <%= content_for(:title, 'Add new van - Le Campeur') %>
+</div>
