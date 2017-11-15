@@ -1,9 +1,7 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-
 require 'faker'
 # Need to work out how records are destroyed through other records
-
 def prepare
   puts "--- cleaning the db ---"
   puts "    destroying all reviews..."
@@ -17,7 +15,6 @@ def prepare
   puts "--- database now clean ---"
   puts ""
 end
-
 def static_user
   puts "--- creating a static user ---"
     User.create!({
@@ -28,7 +25,6 @@ def static_user
   puts "--- static user seeding completed ---"
   puts ""
 end
-
 def users(number)
   puts "    creating #{number} users"
   number.times {
@@ -49,14 +45,13 @@ def users(number)
   puts "--- user seeding completed ---"
   puts ""
 end
-
 def vans(number, user_id = User.all.ids.sample)
   puts "--- creating #{number} vans ---"
   number.times {
     location = Faker::Address.city
     availability = true
-    photo = ["lix2bqmp4kzdpu4sqjiy","mgnhkqe23bgfg2uway9y","gdvenzf37gdoo6k9sspj", "ao1a6omwlx7gw2oabpoa", "ruhpzvv14g7bqysd6pxj", "op2mfyxt21d6mttstfdk"
-      "xanuac8m6wjhlgxvi2zy", "pzxictxdgsc6mjkzq2sz", "noi6220drtm0csy2wxkm", "srf6dxogamsz5g1tk6og", "czhi6wgl4kyhaukjmxzz"].sample
+    photos = ["lix2bqmp4kzdpu4sqjiy","mgnhkqe23bgfg2uway9y","gdvenzf37gdoo6k9sspj", "ao1a6omwlx7gw2oabpoa", "ruhpzvv14g7bqysd6pxj", "op2mfyxt21d6mttstfdk", "xanuac8m6wjhlgxvi2zy", "pzxictxdgsc6mjkzq2sz", "noi6220drtm0csy2wxkm", "srf6dxogamsz5g1tk6og", "czhi6wgl4kyhaukjmxzz"]
+    photo = "http://res.cloudinary.com/joycelewagon/image/upload/v1510744215/#{photos.sample}.jpg"
     make = Faker::Vehicle.manufacture
     model = "van"
     sleeps = Faker::Number.between(1, 4)
@@ -68,7 +63,7 @@ def vans(number, user_id = User.all.ids.sample)
     price = (rand() * 100).round(0) + 20
     Van.create!({
       user_id: user_id, location: location, availability: availability,
-      photo: photo, make: make, model: model, bed: bed, sleep: sleep,
+      remote_photo_url: photo, make: make, model: model, bed: bed, sleep: sleep,
       bathroom: bathroom, kitchen: kitchen, description: description, price: price
     })
   }
@@ -76,7 +71,6 @@ def vans(number, user_id = User.all.ids.sample)
   puts "--- van seeding completed ---"
   puts ""
 end
-
 def rentals(number, user_id = User.all.ids.sample, van_id = Van.all.ids.sample)
   puts "--- creating #{number} rentals ---"
   number.times {
@@ -84,12 +78,12 @@ def rentals(number, user_id = User.all.ids.sample, van_id = Van.all.ids.sample)
     days_rented = 7
     start_date = Faker::Time.forward(days_forward, :morning)
     end_date = Faker::Time.forward(days_forward + days_rented, :morning)
-    photo = ["lix2bqmp4kzdpu4sqjiy","mgnhkqe23bgfg2uway9y","gdvenzf37gdoo6k9sspj", "ao1a6omwlx7gw2oabpoa", "ruhpzvv14g7bqysd6pxj", "op2mfyxt21d6mttstfdk"
-      "xanuac8m6wjhlgxvi2zy", "pzxictxdgsc6mjkzq2sz", "noi6220drtm0csy2wxkm", "srf6dxogamsz5g1tk6og", "czhi6wgl4kyhaukjmxzz"].sample
+    photos = ["lix2bqmp4kzdpu4sqjiy","mgnhkqe23bgfg2uway9y","gdvenzf37gdoo6k9sspj", "ao1a6omwlx7gw2oabpoa", "ruhpzvv14g7bqysd6pxj", "op2mfyxt21d6mttstfdk", "xanuac8m6wjhlgxvi2zy", "pzxictxdgsc6mjkzq2sz", "noi6220drtm0csy2wxkm", "srf6dxogamsz5g1tk6og", "czhi6wgl4kyhaukjmxzz"]
+    photo = "http://res.cloudinary.com/joycelewagon/image/upload/v1510744215/#{photos.sample}.jpg"
     price = ((rand() * 100).round(0) + 20)*3
     status = ["pending", "confirmed", "cancelled"].sample
     Rental.create!({
-      start_date: start_date, end_date: end_date, photo: photo,
+      start_date: start_date, end_date: end_date, remote_photo_url: photo,
       price: price,status: status, user_id: user_id, van_id: van_id
     })
   }
@@ -97,7 +91,6 @@ def rentals(number, user_id = User.all.ids.sample, van_id = Van.all.ids.sample)
   puts "--- rental seeding completed ---"
   puts ""
 end
-
 def reviews(number,  user_id = User.all.ids.sample, van_id = Van.all.ids.sample)
   puts "--- creating #{number} rentals ---"
   # Creating the review variables
@@ -112,18 +105,17 @@ def reviews(number,  user_id = User.all.ids.sample, van_id = Van.all.ids.sample)
     score = ((1..5).to_a).sample
     sample = score - 1
     description = "I rented this van last #{date.sample} and had a #{adjective1[sample]} time. We drove down to #{places.sample} which took #{journey.sample}. The van itself was #{adjective2[sample]} and as for the owner they were just #{owner.sample}"
-      photo = ["lix2bqmp4kzdpu4sqjiy","mgnhkqe23bgfg2uway9y","gdvenzf37gdoo6k9sspj", "ao1a6omwlx7gw2oabpoa", "ruhpzvv14g7bqysd6pxj", "op2mfyxt21d6mttstfdk"
-      "xanuac8m6wjhlgxvi2zy", "pzxictxdgsc6mjkzq2sz", "noi6220drtm0csy2wxkm", "srf6dxogamsz5g1tk6og", "czhi6wgl4kyhaukjmxzz"].sample
+    photos = ["lix2bqmp4kzdpu4sqjiy","mgnhkqe23bgfg2uway9y","gdvenzf37gdoo6k9sspj", "ao1a6omwlx7gw2oabpoa", "ruhpzvv14g7bqysd6pxj", "op2mfyxt21d6mttstfdk", "xanuac8m6wjhlgxvi2zy", "pzxictxdgsc6mjkzq2sz", "noi6220drtm0csy2wxkm", "srf6dxogamsz5g1tk6og", "czhi6wgl4kyhaukjmxzz"]
+    photo = "http://res.cloudinary.com/joycelewagon/image/upload/v1510744215/#{photos.sample}.jpg"
     user_id = User.all.ids.sample
     Review.create!({
-      score: score, description: description, photo: photo
+      score: score, description: description, remote_photo_url: photo
     })
   }
   puts "    A review with a score of on #{Review.first.score} has been added to the db"
   puts "--- review seeding completed ---"
   puts ""
 end
-
 prepare
 puts "--- seeding the database ---"
 # Creating the static user for the user journey
@@ -139,4 +131,4 @@ rentals(5, User.first.id)
 rentals(10)
 # Creating random reviews for seeded users
 reviews(100)
-puts "whooop - all seeding compelted :-)"
+puts "whooop - all seeding completed :-)"
