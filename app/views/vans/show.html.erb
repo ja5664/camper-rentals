@@ -68,3 +68,5 @@
     <%= link_to "Delete Van", van_path(@van), method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
   <% end %>
 </div>
+
+<%= content_for(:title, @van.model) %>
