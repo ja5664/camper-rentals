@@ -3,14 +3,17 @@
   width: 50%;
   border-radius: 5px;
   height: 50%;
-  color: $gray !important;
+  // color: $gray !important;
+  color: black !important;
   margin: 0;
 }
 
-.rental-container-text p {
-  color: $gray !important;
-  padding-top: 50px;
+.rentals-container p {
+  // color: $gray !important;
+  color: black !important;
+  padding-top: 5px;
   font-size: 16px !important;
+  margin: 0 !important;
 }
 
 .form-container {
@@ -19,7 +22,7 @@
   background-color: white;
   padding-bottom: 30px;
   border-radius: 0 0 5px 5px;
-  color: $gray !important;
+  color: black !important;
 }
 
 .booking-container {
