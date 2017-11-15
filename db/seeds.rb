@@ -45,6 +45,7 @@ def users(number)
   puts "--- user seeding completed ---"
   puts ""
 end
+
 def vans(number, user_id = User.all.ids.sample)
   puts "--- creating #{number} vans ---"
   number.times {
@@ -71,6 +72,7 @@ def vans(number, user_id = User.all.ids.sample)
   puts "--- van seeding completed ---"
   puts ""
 end
+
 def rentals(number, user_id = User.all.ids.sample, van_id = Van.all.ids.sample)
   puts "--- creating #{number} rentals ---"
   number.times {

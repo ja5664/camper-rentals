@@ -1,5 +1,7 @@
 class RentalsController < ApplicationController
     before_action :set_rental, only: [:show, :edit, :update, :destroy]
+    before_action :set_van, only: [:new, :create]
+
   def index
     @rentals = policy_scope(Rental).order(created_at: :desc)
   end
@@ -11,9 +13,12 @@ class RentalsController < ApplicationController
 
   def create
     @rental = Rental.new(rental_params)
+    @rental.van = @van
+    @rental.user = current_user
     authorize @rental
+    # binding.pry
     if @rental.save
-      redirect_to rental_path(@rental)
+      redirect_to van_rentals_path
     else
       render :new
     end
@@ -49,6 +54,10 @@ class RentalsController < ApplicationController
 
   def rental_params
     params.require(:rental).permit(:start_date, :end_date, :photo, :price, :status)
+  end
+
+  def set_van
+    @van = Van.find(params[:van_id])
   end
 
   def set_rental

@@ -1,9 +1,4 @@
 // CSS for Vans show page //
-
-table tc .icon {
-  width: 100px;
-}
-
 .title {
   padding-left: 30px;
 }
@@ -40,6 +35,10 @@ table tc .icon {
   border: 1px solid black;
   grid-row: 2 / span 1;
   grid-column: 1 / span 2;
+
+  ul-inline {
+    list-style: none;
+  }
 }
 
 .spacing {
