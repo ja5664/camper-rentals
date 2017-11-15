@@ -1,34 +1,22 @@
-<div class="title padding">
-  <h3>
-    <%= @van.make.upcase %> <%= @van.model.upcase %>
-    <%= link_to "BOOK", new_van_rental_path(@van),class: "btn btn-default" %>
-  </h3>
-</div>
-
-<div class="link padding">
-  <!-- Display All Vans -->
-  <%= link_to "BACK TO RESULTS", vans_path %>
-  <!-- Edit Van -->
-  <% if policy(@van).edit? %>
-    | <%= link_to "EDIT", edit_van_path(@van) %> |
-  <% end %>
-  <!-- Delete Van -->
-  <% if policy(@van).destroy? %>
-    <%= link_to "DELETE", van_path(@van), method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
-  <% end %>
-</div>
-
 <div class="display">
-  <!-- Description -->
-  <div class="description spacing">
-    <h5><strong>DESCRIPTION</strong></h5>
-    <p><%= @van.description %></p>
-    <br>
-    <h5><strong>PRICE</strong></h5>
-    <p>£<%= @van.price %></p>
+  <!-- Banner -->
+  <% photo_url = @van.photo? ? @van.photo : 'lix2bqmp4kzdpu4sqjiy' %>
+  <div class="image spacing" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= cl_image_path photo_url %>)">
+    <!-- Title and Booking -->
+    <div class="booking">
+      <h1><%= @van.make.upcase %> <%= @van.model.upcase %></h1>
+      <h4><%= @van.description %></h4>
+      <h6>£<%= @van.price %></h6>
+      <h3><%= link_to "BOOK", new_van_rental_path(@van),class: "btn btn-default" %></h3>
+    </div>
   </div>
 
-  <!-- Location -->
+  <!-- Description -->
+  <div class="description spacing">
+    <h5><strong>This is a map.</strong></h5>
+  </div>
+
+  <!-- Details -->
   <div class="details spacing">
     <!-- Geocoding on location? -->
     <h5><strong>LOCATION</strong></h5>
@@ -45,11 +33,6 @@
         <i class="fa fa-fire" aria-hidden="true"></i>
         <%= @van.kitchen ? "Kitchen included" : "Kitchen not included" %></li>
     </ul>
-  </div>
-
-  <!-- Additional Space (currently displaying image) -->
-  <% photo_url = @van.photo? ? @van.photo : 'lix2bqmp4kzdpu4sqjiy' %>
-  <div class="image spacing" style="background-image: url(<%= cl_image_path photo_url %>)">
   </div>
 
   <!-- Reviews -->
@@ -77,8 +60,20 @@
         </li>
         <% end %>
     </ul>
-
   </div>
+</div>
+
+<div class="link padding">
+  <!-- Display All Vans -->
+  <%= link_to "BACK TO RESULTS", vans_path %>
+  <!-- Edit Van -->
+  <% if policy(@van).edit? %>
+    | <%= link_to "EDIT", edit_van_path(@van) %> |
+  <% end %>
+  <!-- Delete Van -->
+  <% if policy(@van).destroy? %>
+    <%= link_to "DELETE", van_path(@van), method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
+  <% end %>
 </div>
 
 <%= content_for(:title, @van.model) %>

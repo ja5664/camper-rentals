@@ -1,29 +1,41 @@
-.rentals-container{
+.rentals-container {
   background-color: $light-gray;
   width: 50%;
   border-radius: 5px;
   height: 50%;
-  color: $gray !important;
+  // color: $gray !important;
+  color: black !important;
   margin: 0;
 }
 
-.rental-container-text p {
-  color: $gray !important;
-  padding-top: 50px;
+.rentals-container p {
+  // color: $gray !important;
+  color: black !important;
+  padding-top: 5px;
   font-size: 16px !important;
+  margin: 0 !important;
 }
 
+.container {
+  width: 50%;
+}
 .form-container {
   padding-top: 30px;
   font-size: 16px !important;
   background-color: white;
   padding-bottom: 30px;
   border-radius: 0 0 5px 5px;
-  color: $gray !important;
+  color: black !important;
 }
 
 .booking-container {
   width: 40%;
+}
+
+.container-login {
+  position: relative;
+  left: -300px;
+
 }
 
 .form-label-container {
