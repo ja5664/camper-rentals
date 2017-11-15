@@ -3,7 +3,7 @@
 <div class="cards">
   <% @vans.each do |van| %>
     <div class="col-xs-12 col-sm-3">
-      <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("https://asideofsweet.com/wp-content/uploads/2017/05/VanLife-Custom-Camper-Van-Travel-DIY-Inspiration.jpg");">
+      <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("<%= cl_image_path van.photo %>");">
         <div class="card-body">
           <h5><%= van.make %> <%= van.model %></h5>
           <h5>£<%= van.price %></h5>

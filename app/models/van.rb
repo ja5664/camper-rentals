@@ -3,5 +3,7 @@ class Van < ApplicationRecord
   has_many :reviews
 
   validates :location, :description, :photo, :make, :model, :bed, :sleep, :price, presence: true
+
+  mount_uploader :photo, PhotoUploader
 end
 
