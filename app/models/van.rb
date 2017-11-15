@@ -1,6 +1,6 @@
 class Van < ApplicationRecord
   belongs_to :user
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
 
   validates :location, :description, :photo, :make, :model, :bed, :sleep, :price, presence: true
 
