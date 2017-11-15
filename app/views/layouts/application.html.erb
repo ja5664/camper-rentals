@@ -15,7 +15,11 @@
     <!-- Navigation Bar -->
     <%= render "shared/flashes" %>
     <%= render "shared/navbar" %>
-    <%= yield %>
+
+    <div class="content">
+      <%= yield %>
+    </div>
+
     <!-- Devise flash messages -->
     <%= render "shared/footer" %>
 
