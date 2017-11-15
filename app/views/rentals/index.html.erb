@@ -1,10 +1,12 @@
-<h1> Your Rentals!!! </h1>
-<% @rentals.each do |rental| %>
-  <p>Start date:<%= rental.start_date.strftime("%m/%d/%Y") %></p>
-  <p>End date:<%= rental.end_date.strftime("%m/%d/%Y") %></p>
-  <p>Price:<%= rental.price %></p>
-  <p><%= link_to "View details", rental_path(rental.id) %></p>
-  <hr>
-<% end %>
+<div class="container">
+  <h1> Your Rentals!!! </h1>
+  <% @rentals.each do |rental| %>
+    <p>Start date:<%= rental.start_date.strftime("%m/%d/%Y") %></p>
+    <p>End date:<%= rental.end_date.strftime("%m/%d/%Y") %></p>
+    <p>Price:<%= rental.price %></p>
+    <p><%= link_to "View details", rental_path(rental.id) %></p>
+    <hr>
+  <% end %>
 
-<%= content_for(:title, 'Rent a car - Le Campeur') %>
+  <%= content_for(:title, 'Rent a car - Le Campeur') %>
+</div>
