@@ -1,5 +1,7 @@
-<%= link_to "Add New Van", new_van_path %>
 
+<% if user_signed_in? %>
+  <%= link_to "Add New Van", new_van_path %>
+<% end %>
 <div class="cards">
   <% @vans.each do |van| %>
     <% if van.photo? %>
