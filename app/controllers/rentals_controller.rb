@@ -14,8 +14,9 @@ class RentalsController < ApplicationController
   def create
     @rental = Rental.new(rental_params)
     authorize @rental
+    # binding.pry
     if @rental.save
-      redirect_to rental_path(@rental)
+      redirect_to van_rentals_path
     else
       render :new
     end
@@ -50,7 +51,7 @@ class RentalsController < ApplicationController
   private
 
   def rental_params
-    params.require(:rental).permit(:start_date, :end_date)
+    params.require(:rental).permit(:start_date, :end_date, :photo, :price, :status)
   end
 
   def set_van
