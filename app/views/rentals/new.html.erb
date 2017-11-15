@@ -1,17 +1,26 @@
-<div class="container">
-  <h2>Add New Rental</h2>
-
-  <%= simple_form_for [@van, @rental] do |r| %>
-    <%= r.input :start_date %>
-    <%= r.input :end_date %>
-    <%= r.submit "Submit", class: "btn btn-default" %>
-  <% end %>
-
-  <hr>
-
-  <%= link_to van_rentals_path do %>
-    <i class="fa fa-undo" aria-hidden="true"></i> Back to List
-  <% end %>
-
-  <%= content_for(:title, 'New rental - Le Campeur') %>
+<div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('http://res.cloudinary.com/joycelewagon/image/upload/v1510758702/n5i4cunpvbegw2e5nrxw.jpg');">
+  <div class="booking-container">
+    <div class="banner-content">
+        <div class="container-banner">
+          <h1>Book this van!</h1>
+        </div>
+    </div>
+    <div class="form-container">
+      <%= simple_form_for [@van, @rental] do |r| %>
+      <div class="form-label-container">
+        <%= r.label "When do you want to pick up your camper?" %>
+      </div>
+        <%= r.input :start_date, label: false %>
+      <div class="form-label-container">
+        <%= r.label "When does your journey end?" %>
+       </div>
+      <%= r.input :end_date, label: false %>
+      <%= r.submit "Submit", class: "btn btn-default" %>
+      <% end %>
+    </div>
+    <%= link_to van_path(@van) do %>
+      <i class="fa fa-undo" aria-hidden="true"></i> Return to this van
+    <% end %>
+    <%= content_for(:title, 'New rental - Le Campeur') %>
+  </div>
 </div>
