@@ -1,0 +1,29 @@
+<div class="review-list">
+  <ul-inline>
+    <h1>All Reviews</h1>
+    <% @reviews.each do |review| %>
+      <div class="comment">
+        <div class="review-content">
+          <!-- Ratings -->
+          <% review.score.times do %>
+            <i class="fa fa-star"></i>
+          <% end %>
+          <% (5 - review.score).times do %>
+            <i class="fa fa-star-o"></i>
+          <% end %>
+        <!-- User and Date/Time -->
+          <p>By <strong><%= User.find(review.user_id).email %></strong> on <strong><%= review.created_at.strftime("%d %b %Y") %></strong></p>
+        <!-- Description -->
+          <%= review.description %>
+        </div>
+        <div class="review-photo">
+          <% if review.photo? %>
+            <%= cl_image_tag review.photo, height: 150, width: 250, crop: :fill %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </ul-inline>
+</div>
+
+<%= content_for(:title, "All Reviews") %>

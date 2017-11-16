@@ -8,7 +8,10 @@
       <h4><%= @van.description %></h4>
       <h6>£<%= number_with_delimiter(@van.price) %></h6><br>
       <!-- Book Van -->
-      <h3><%= link_to "BOOK", new_van_rental_path(@van),class: "btn btn-default" %>
+      <h3>
+        <% if policy(@van).edit? == false %>
+          <%= link_to "BOOK", new_van_rental_path(@van),class: "btn btn-default" %>
+        <% end %>
         <!-- Edit Van -->
         <% if policy(@van).edit? %>
           <%= link_to "EDIT", edit_van_path(@van), class: "btn btn-default" %>
@@ -69,14 +72,15 @@
         <% else %>
           (<%= @van.reviews.count %> reviews)
         <% end %>
-        &nbsp
-        <div class="link">
+      </h5>
+      <p>
+          <div class="link">
           <!-- Add Reviews -->
           <%= link_to "ADD", new_van_review_path(@van) %> &nbsp|&nbsp
           <!-- List All Reviews for Van -->
           <%= link_to "SHOW ALL", van_reviews_path(@van) %>
         </div>
-      </h5>
+      </p>
       <!-- Pop Up -->
       <ul-inline>
         <% @van.reviews.last(5).each do |review| %>
