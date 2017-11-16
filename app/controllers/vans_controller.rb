@@ -15,6 +15,11 @@ class VansController < ApplicationController
     authorize @van
     @rental = Rental.new
     @van = Van.find(params[:id])
+
+    @hash = Gmaps4rails.build_markers(@van) do |van, marker|
+      marker.lat van.latitude
+      marker.lng van.longitude
+    end
   end
 
   def new

@@ -1,6 +1,9 @@
 class ReviewsController < ApplicationController
   before_action :set_van, only: [:new, :create]
 
+  def index
+    @reviews = Review.all
+  end
 
   def new
     @review = Review.new
