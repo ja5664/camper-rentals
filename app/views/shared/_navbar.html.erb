@@ -4,6 +4,16 @@
     <%= image_tag "logo.png" %>
   <% end %>
 
+  <!-- Search bar -->
+  <div class="search">
+    <%= form_tag(vans_path, method: :get) do %>
+      <%= text_field_tag :query %>
+      <%= date_field(:rental, :start_date) %>
+      <%= date_field(:rental, :end_date) %>
+      <%= submit_tag 'Search', class: "btn btn-success" %>
+    <% end %>
+  </div>
+
   <!-- Right Navigation -->
   <div class="navbar-wagon-right hidden-xs hidden-sm">
 
