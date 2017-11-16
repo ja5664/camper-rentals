@@ -1,12 +1,13 @@
 class ReviewPolicy < ApplicationPolicy
+
   class Scope < Scope
     def resolve
-      scope
+      scope.all
     end
   end
 
   def create?
-    true
+    return true
   end
 
   def update?

@@ -16,7 +16,6 @@ class RentalsController < ApplicationController
     @rental.van = @van
     @rental.user = current_user
     authorize @rental
-    # binding.pry
     if @rental.save
       redirect_to van_rentals_path
     else
