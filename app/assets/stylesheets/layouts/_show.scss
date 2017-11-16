@@ -3,11 +3,6 @@
   padding-left: 35px;
 }
 
-.link {
-  font-size: 14px;
-  text-align: center;
-}
-
 .display {
   display: grid;
   grid-template-rows: 1fr 1fr;
@@ -65,4 +60,8 @@
   margin: 10px;
   padding: 20px;
   background-color: #EDE6DE;
+}
+
+.icon {
+  font-size: 12px;
 }

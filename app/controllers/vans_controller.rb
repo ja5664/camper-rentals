@@ -4,11 +4,19 @@ class VansController < ApplicationController
 
   def index
     @vans = policy_scope(Van).order(created_at: :desc)
+    @vans = Van.where.not(latitude: nil, longitude: nil)
+
+    @hash = Gmaps4rails.build_markers(@vans) do |van, marker|
+      marker.lat van.latitude
+      marker.lng van.longitude
+    end
   end
 
   def show
     authorize @van
     @rental = Rental.new
+    @van = Van.find(params[:id])
+    @van_coordinates = { lat: @van.latitude, lng: @van.longitude }
   end
 
   def new
