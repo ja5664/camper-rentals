@@ -1,79 +1,217 @@
 <div class="display">
   <!-- Banner -->
   <% photo_url = @van.photo? ? @van.photo : 'lix2bqmp4kzdpu4sqjiy' %>
-  <div class="image spacing" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= cl_image_path photo_url %>)">
+  <div class="image" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= cl_image_path photo_url %>)">
     <!-- Title and Booking -->
     <div class="booking">
       <h1><%= @van.make.upcase %> <%= @van.model.upcase %></h1>
       <h4><%= @van.description %></h4>
-      <h6>£<%= @van.price %></h6>
-      <h3><%= link_to "BOOK", new_van_rental_path(@van),class: "btn btn-default" %></h3>
+      <h6>£<%= number_with_delimiter(@van.price) %></h6>
+      <!-- Book Van -->
+      <h3><%= link_to "BOOK", new_van_rental_path(@van),class: "btn btn-default" %>
+        <!-- Edit Van -->
+        <% if policy(@van).edit? %>
+          <%= link_to "EDIT", edit_van_path(@van), class: "btn btn-default" %>
+        <% end %>
+        <!-- Delete Van -->
+        <% if policy(@van).destroy? %>
+          <%= link_to "DELETE", van_path(@van), class: "btn btn-default", method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
+        <% end %>
+      </h3>
+
     </div>
   </div>
 
-  <!-- Description -->
-  <div class="description spacing">
-    <h5><strong>This is a map.</strong></h5>
+  <!-- Map Display -->
+  <div class="location">
+      <div id="map-show" style="width: 100%; height: 100%;"></div>
   </div>
 
   <!-- Details -->
-  <div class="details spacing">
-    <!-- Geocoding on location? -->
-    <h5><strong>LOCATION</strong></h5>
-    <p><%= @van.location %></p>
-    <br>
-    <h5><strong>DETAILS</strong></h5>
-    <ul-inline>
-      <li><i class="fa fa-bed" aria-hidden="true"></i> <%= @van.bed %> bed(s) | <%= @van.sleep %> person(s)</li>
-      <li>
-        <i class="fa fa-bath" aria-hidden="true"></i>
-        <%= @van.bathroom ? "Bathroom included" : "Bathroom not included" %>
-      </li>
-      <li>
-        <i class="fa fa-fire" aria-hidden="true"></i>
-        <%= @van.kitchen ? "Kitchen included" : "Kitchen not included" %></li>
-    </ul>
+  <div class="details">
+    <div class="spacing">
+      <!-- Geocoding on location? -->
+      <h5><strong>LOCATION</strong></h5>
+      <p><%= @van.location %></p>
+      <br>
+      <h5><strong>DETAILS</strong></h5>
+      <ul-inline>
+        <li><i class="fa fa-bed" aria-hidden="true"></i>&nbsp
+          <%= @van.bed %> bed(s) | <%= @van.sleep %> person(s)</li>
+        <li>
+          <i class="fa fa-bath" aria-hidden="true"></i>&nbsp
+          <%= @van.bathroom ? "Bathroom included" : "Bathroom not included" %>
+        </li>
+        <li>
+          <i class="fa fa-fire" aria-hidden="true"></i>&nbsp
+          <%= @van.kitchen ? "Kitchen included" : "Kitchen not included" %></li>
+      </ul>
+    </div>
   </div>
 
   <!-- Reviews -->
-  <div class="reviews spacing">
-    <h5>
-      <strong>REVIEWS</strong>
-      (<%= @van.reviews.count %> reviews)
-    <!-- Average reviews -->
-    <%= link_to new_van_review_path(@van) do %>
-      <i class="fa fa-plus" aria-hidden="true"></i>
-    <% end %>
-    </h5>
-    <!-- Listing of last three individual reviews -->
-    <ul-inline>
-      <% @van.reviews.last(3).each do |review| %>
-        <li>
-          <% review.score.times do %>
-            <i class="fa fa-star"></i>
-          <% end %>
-          <% (5 - review.score).times do %>
-            <i class="fa fa-star-o"></i>
-          <% end %>
-          <%= review.description %>
-          <%= link_to "VIEW", review %>
-        </li>
+  <div class="reviews">
+    <div class="spacing">
+      <h5>
+        <strong>REVIEWS</strong>&nbsp
+        <% if @van.reviews.count == 1 %>
+          (<%= @van.reviews.count %> review)
+        <% else %>
+          (<%= @van.reviews.count %> reviews)
         <% end %>
-    </ul>
+        &nbsp
+        <div class="link">
+          <!-- Add Reviews -->
+          <%= link_to "ADD", new_van_review_path(@van) %> &nbsp|&nbsp
+          <!-- List All Reviews for Van -->
+          <%= link_to "SHOW ALL", review_path(@van) %>
+        </div>
+      </h5>
+      <!-- Pop Up -->
+      <ul-inline>
+        <% @van.reviews.last(3).each do |review| %>
+          <li>
+            <% review.score.times do %>
+              <i class="fa fa-star"></i>
+            <% end %>
+            <% (5 - review.score).times do %>
+              <i class="fa fa-star-o"></i>
+            <% end %>
+            - <%= review.user_id %> | <%= review.created_at.strftime("%d %b %Y") %> &nbsp
+            <!-- Pop Up "Link" -->
+            <div class="popup" onclick="myFunction()">
+              <div class="icon"><i class="fa fa-search" aria-hidden="true"></i></div>
+              <!-- Pop Up Display -->
+              <span class="popuptext" id="popup-display">
+                <p>
+                  <% review.score.times do %>
+                    <i class="fa fa-star"></i>
+                  <% end %>
+                  <% (5 - review.score).times do %>
+                    <i class="fa fa-star-o"></i>
+                  <% end %>
+                </p>
+                <p><%= review.description %></p>
+                <p><%= cl_image_tag review.photo %></p>
+              </span>
+              </div>
+          </li>
+        <% end %>
+      </ul-inline>
+    </div>
   </div>
 </div>
 
-<div class="link padding">
-  <!-- Display All Vans -->
-  <%= link_to "BACK TO RESULTS", vans_path %>
-  <!-- Edit Van -->
-  <% if policy(@van).edit? %>
-    | <%= link_to "EDIT", edit_van_path(@van) %> |
-  <% end %>
-  <!-- Delete Van -->
-  <% if policy(@van).destroy? %>
-    <%= link_to "DELETE", van_path(@van), method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
-  <% end %>
-</div>
+<% content_for(:after_js) do %>
+  <script>
+    // Google Maps
+    var handler = Gmaps.build('Google');
+    handler.buildMap({ internal: { id: 'map-show' } }, function() {
+      markers = handler.addMarkers(<%= raw @hash.to_json %>);
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+      handler.getMap().setZoom(14);
+    });
+    // Snazzy Maps - Theme: Cool Grey
+    var styles = [
+                  {
+                      "featureType": "landscape",
+                      "elementType": "labels",
+                      "stylers": [
+                          {
+                              "visibility": "off"
+                          }
+                      ]
+                  },
+                  {
+                      "featureType": "transit",
+                      "elementType": "labels",
+                      "stylers": [
+                          {
+                              "visibility": "off"
+                          }
+                      ]
+                  },
+                  {
+                      "featureType": "poi",
+                      "elementType": "labels",
+                      "stylers": [
+                          {
+                              "visibility": "off"
+                          }
+                      ]
+                  },
+                  {
+                      "featureType": "water",
+                      "elementType": "labels",
+                      "stylers": [
+                          {
+                              "visibility": "off"
+                          }
+                      ]
+                  },
+                  {
+                      "featureType": "road",
+                      "elementType": "labels.icon",
+                      "stylers": [
+                          {
+                              "visibility": "off"
+                          }
+                      ]
+                  },
+                  {
+                      "stylers": [
+                          {
+                              "hue": "#00aaff"
+                          },
+                          {
+                              "saturation": -100
+                          },
+                          {
+                              "gamma": 2.15
+                          },
+                          {
+                              "lightness": 12
+                          }
+                      ]
+                  },
+                  {
+                      "featureType": "road",
+                      "elementType": "labels.text.fill",
+                      "stylers": [
+                          {
+                              "visibility": "on"
+                          },
+                          {
+                              "lightness": 24
+                          }
+                      ]
+                  },
+                  {
+                      "featureType": "road",
+                      "elementType": "geometry",
+                      "stylers": [
+                          {
+                              "lightness": 57
+                          }
+                      ]
+                  }
+                ];
+      handler.buildMap({
+        provider: {
+          styles: styles
+        }, internal: { id: "map-show" } }, function() {
+        markers = handler.addMarkers(<%= raw @hash.to_json %>);
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+        handler.getMap().setZoom(14);
+      });
+    // Pop Up
+    function myFunction() {
+      var popup = document.getElementById("popup-display");
+      popup.classList.toggle("show");
+    }
+  </script>
+<% end %>
 
 <%= content_for(:title, @van.model) %>

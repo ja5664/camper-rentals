@@ -1,12 +1,20 @@
+<!-- Button: Show Map -->
+<div class="map-button">
+  <h4><button id="display-button" class="btn btn-default" type="geocode">SHOW ON MAP</button></h4>
+</div>
+
+<!-- Geocoding Map -->
+<div id="map" class="hidden-map" style="width: 100%;"></div>
+
+<!-- Results Display -->
 <div class="cards">
-  <% @vans.each do |van| %>
+  <% @results.each do |van| %>
     <% photo_url = van.photo? ? van.photo : 'lix2bqmp4kzdpu4sqjiy' %>
-      <!-- Photo exists on seed/Cloudinary -->
     <div class="card" style="background-image: url(<%= cl_image_path photo_url %>);">
       <div class="card-body">
         <h4><%= van.make %></h4>
         <h6><light><%= van.location %></light></h6>
-        <h6><light>£<%= van.price %></light></h6>
+        <h6><light>£<%= number_with_delimiter(van.price) %></light></h6>
         <%= link_to "", van_path(van), class: "card-link" %>
       </div>
     </div>
@@ -14,3 +22,111 @@
 </div>
 
 <%= content_for(:title, 'Le Campeur') %>
+
+<!-- JavaScript: Toggle Map Display -->
+<% content_for(:after_js) do %>
+  <script>
+    // Snazzy Maps - Theme: Cool Grey
+    var styles = [
+                  {
+                      "featureType": "landscape",
+                      "elementType": "labels",
+                      "stylers": [
+                          {
+                              "visibility": "off"
+                          }
+                      ]
+                  },
+                  {
+                      "featureType": "transit",
+                      "elementType": "labels",
+                      "stylers": [
+                          {
+                              "visibility": "off"
+                          }
+                      ]
+                  },
+                  {
+                      "featureType": "poi",
+                      "elementType": "labels",
+                      "stylers": [
+                          {
+                              "visibility": "off"
+                          }
+                      ]
+                  },
+                  {
+                      "featureType": "water",
+                      "elementType": "labels",
+                      "stylers": [
+                          {
+                              "visibility": "off"
+                          }
+                      ]
+                  },
+                  {
+                      "featureType": "road",
+                      "elementType": "labels.icon",
+                      "stylers": [
+                          {
+                              "visibility": "off"
+                          }
+                      ]
+                  },
+                  {
+                      "stylers": [
+                          {
+                              "hue": "#00aaff"
+                          },
+                          {
+                              "saturation": -100
+                          },
+                          {
+                              "gamma": 2.15
+                          },
+                          {
+                              "lightness": 12
+                          }
+                      ]
+                  },
+                  {
+                      "featureType": "road",
+                      "elementType": "labels.text.fill",
+                      "stylers": [
+                          {
+                              "visibility": "on"
+                          },
+                          {
+                              "lightness": 24
+                          }
+                      ]
+                  },
+                  {
+                      "featureType": "road",
+                      "elementType": "geometry",
+                      "stylers": [
+                          {
+                              "lightness": 57
+                          }
+                      ]
+                  }
+                ];
+    // Toggle Button for Map Display
+    const map = document.getElementById("map");
+    document.getElementById('display-button').onclick = function() {
+      map.classList.toggle("shown-map")
+    };
+
+    // Geocoding
+    var handler = Gmaps.build("Google");
+    handler.buildMap({
+      provider: {
+        styles: styles
+      }, internal: { id: "map" } }, function() {
+      markers = handler.addMarkers(<%= raw @hash.to_json %>);
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+      handler.getMap().setZoom(14);
+    });
+  </script>
+<% end %>
