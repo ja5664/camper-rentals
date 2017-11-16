@@ -102,7 +102,11 @@
                   <% end %>
                 </p>
                 <p><%= review.description %></p>
-                <p><%= cl_image_tag review.photo, height: 130, width: 130, crop: :fill %></p>
+                <p>
+                  <% if review.photo? %>
+                    <%= cl_image_tag review.photo, height: 130, width: 130, crop: :fill %>
+                  <% end %>
+                    </p>
               </span>
               </div>
           </li>
