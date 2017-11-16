@@ -1,10 +1,14 @@
 <div class="wrapper">
-  <div class="parent ">
-    <div class="child left"><h1 class="caption">RENT A VAN</h1></div>
+  <div class="parent">
+    <%= link_to vans_path do %>
+      <div class="child left"><h1 class="caption">RENT A VAN</h1></div>
+    <% end %>
   </div>
 
   <div class="parent">
-    <div class="child right"><h1 class="caption">LIST A VAN</h1></div>
+    <%= link_to new_user_session_path do %>
+      <div class="child right"><h1 class="caption">LIST A VAN</h1></div>
+    <% end %>
   </div>
 </div>
 
