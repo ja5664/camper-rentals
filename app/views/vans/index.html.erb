@@ -8,7 +8,7 @@
 
 <!-- Results Display -->
 <div class="cards">
-  <% @vans.each do |van| %>
+  <% @results.each do |van| %>
     <% photo_url = van.photo? ? van.photo : 'lix2bqmp4kzdpu4sqjiy' %>
     <div class="card" style="background-image: url(<%= cl_image_path photo_url %>);">
       <div class="card-body">

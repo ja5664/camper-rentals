@@ -1,6 +1,7 @@
 class Van < ApplicationRecord
   belongs_to :user
   has_many :reviews, dependent: :destroy
+  has_many :rentals
   validates :location, :description, :photo, :make, :model, :bed, :sleep, :price, presence: true
 
   # Enables photo uploads
@@ -11,6 +12,11 @@ class Van < ApplicationRecord
   after_validation :geocode, if: :location_changed?
 
   include PgSearch
-  multisearchable against: [:location, :price]
+  pg_search_scope :global_search,
+    against: [ :location ],
+    associated_against: {
+      rentals: [ :start_date, :end_date ]
+    }
+
 end
 
