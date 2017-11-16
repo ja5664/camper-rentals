@@ -50,3 +50,4 @@ class ReviewsController < ApplicationController
     params.require(:review).permit(:score, :description, :photo)
   end
 end
+
