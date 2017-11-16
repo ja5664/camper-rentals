@@ -17,12 +17,12 @@
 .card-body {
   opacity: 0;
   padding: 10px;
-  color: white;
+  color: black;
   transition: 0.2s;
 }
 
 .card:hover .card-body{
-  opacity: 1;
+  opacity: 0.2;
 }
 
 .card-link {
@@ -32,6 +32,6 @@
   right: 0;
   width: 100%;
   z-index: 2;
-  opacity: 0.3;
-  background-color: black;
+  opacity: 0;
+  background-color: white;
 }
