@@ -3,7 +3,8 @@ class VansController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :new, :create]
 
   def index
-    @vans = policy_scope(Van).order(created_at: :desc)
+    authorize @van
+    @vans = Van.all
   end
 
   def show

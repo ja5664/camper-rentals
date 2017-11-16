@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+  get 'pages/home'
+
   devise_for :users
   mount Attachinary::Engine => "/attachinary"
-  root to: "vans#index"
+  root to: "pages#home"
 
   resources :vans do
     resources :rentals, only: [:index, :new, :create]
