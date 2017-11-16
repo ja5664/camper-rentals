@@ -10,12 +10,12 @@
   height: calc(100vh - 50px)
 }
 
-.map {
+.location {
   grid-row: 2 / span 1;
   border-right: 1px solid #9099A2;
 }
 
-.map:hover, .details:hover, .reviews:hover {
+.location:hover, .details:hover, .reviews:hover {
     background-color: rgba(150, 133, 143, 0.3);
     transition: 0.5s;
 }

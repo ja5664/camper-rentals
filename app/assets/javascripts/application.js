@@ -1,3 +1,5 @@
+//= require jquery
+//= require jquery-ujs
 //= require rails-ujs
 //= require jquery-fileupload/basic
 //= require cloudinary/jquery.cloudinary
