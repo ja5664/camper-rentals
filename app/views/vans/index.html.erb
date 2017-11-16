@@ -1,21 +1,5 @@
-<div class="cards">
-  <% @vans.each do |van| %>
-    <% photo_url = van.photo? ? van.photo : 'lix2bqmp4kzdpu4sqjiy' %>
-    <div class="card" style="background-image: url(<%= cl_image_path photo_url %>);">
-      <div class="card-body">
-        <h4><%= van.make %></h4>
-        <h6><light><%= van.location %></light></h6>
-        <h6><light>£<%= number_with_delimiter(van.price) %></light></h6>
-        <%= link_to "", van_path(van), class: "card-link" %>
-      </div>
-    </div>
-  <% end %>
-</div>
-
-<!-- Geocoding -->
-
-<div id="map" style="width: 100%; height: 200px;"></div>
-
+<!-- Geocoding Map -->
+<div id="map" style="width: 100%; height: 300px;"></div>
 <% content_for(:after_js) do %>
   <script>
     var handler = Gmaps.build('Google');
@@ -31,5 +15,20 @@
     });
     </script>
 <% end %>
+
+<!-- Results Display -->
+<div class="cards">
+  <% @vans.each do |van| %>
+    <% photo_url = van.photo? ? van.photo : 'lix2bqmp4kzdpu4sqjiy' %>
+    <div class="card" style="background-image: url(<%= cl_image_path photo_url %>);">
+      <div class="card-body">
+        <h4><%= van.make %></h4>
+        <h6><light><%= van.location %></light></h6>
+        <h6><light>£<%= number_with_delimiter(van.price) %></light></h6>
+        <%= link_to "", van_path(van), class: "card-link" %>
+      </div>
+    </div>
+  <% end %>
+</div>
 
 <%= content_for(:title, 'Le Campeur') %>
