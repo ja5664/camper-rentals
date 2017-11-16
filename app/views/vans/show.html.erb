@@ -87,7 +87,7 @@
             <% (5 - review.score).times do %>
               <i class="fa fa-star-o"></i>
             <% end %>
-            - <%= User.find(review.user_id).email.upcase %> | <%= review.created_at.strftime("%d %b %Y") %> &nbsp
+            - <%= User.find(review.user_id).first_name %> | <%= review.created_at.strftime("%d %b %Y") %> &nbsp
             <!-- Pop Up "Link" -->
             <div class="popup" id="popupclick" onclick >
               <div class="icon"><i class="fa fa-search" aria-hidden="true"></i></div>

@@ -1,0 +1,24 @@
+// CSS for Reviews index page //
+
+.review-list {
+  display: grid;
+  grid-template-rows: 50% 50%;
+}
+
+.comment {
+  display: flex;
+  justify-content: space-between;
+  width: 60%;
+  margin: auto;
+  align-items: center;
+  // text-align: center;
+}
+
+.review-content {
+  flex: 1 1 auto;
+  align-items: center;
+}
+
+.review-photo {
+  flex: 0 0 auto;
+}
