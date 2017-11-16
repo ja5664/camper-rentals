@@ -5,5 +5,8 @@ class Rental < ApplicationRecord
   # validates :start_date, :end_date, :price, :status, :photo, presence: true
 
   mount_uploader :photo, PhotoUploader
+
+  include PgSearch
+  multisearchable against: [:start_date, :end_date]
 end
 

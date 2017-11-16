@@ -11,6 +11,7 @@ gem 'puma'
 gem 'rails', '5.1.4'
 gem 'redis'
 gem 'jquery-rails' # required for Google Maps to work
+gem 'pg_search'
 
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass'
