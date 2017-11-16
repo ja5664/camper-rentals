@@ -1,20 +1,10 @@
+<!-- Button: Show Map -->
+<div class="map-button">
+  <h3><button id="display-button" class="btn btn-default" type="geocode">SHOW ON MAP</button></h3>
+</div>
+
 <!-- Geocoding Map -->
 <div id="map" style="width: 100%; height: 300px;"></div>
-<% content_for(:after_js) do %>
-  <script>
-    var handler = Gmaps.build('Google');
-    handler.buildMap({ internal: { id: 'map' } }, function() {
-      markers = handler.addMarkers(<%= raw @hash.to_json %>);
-      handler.bounds.extendWith(markers);
-      handler.fitMapToBounds();
-      if (markers.length == 0) {
-        handler.getMap().setZoom(2);
-      } else if (markers.length == 1) {
-        handler.getMap().setZoom(14);
-      }
-    });
-    </script>
-<% end %>
 
 <!-- Results Display -->
 <div class="cards">
@@ -32,3 +22,36 @@
 </div>
 
 <%= content_for(:title, 'Le Campeur') %>
+
+<!-- JavaScript: Toggle Map Display -->
+<% content_for(:after_js) do %>
+  <script>
+    document.getElementById("map").style.display = "none";
+    document.getElementById('display-button').onclick = function() {
+      const div = document.getElementById("map");
+      if (div.style.display !== "none") {
+        div.style.display = "none";
+      }
+      else {
+          div.style.display = "block";
+      }
+    };
+  </script>
+<% end %>
+
+<!-- JavaScript: Geocoding -->
+<% content_for(:after_js) do %>
+  <script>
+    var handler = Gmaps.build('Google');
+    handler.buildMap({ internal: { id: 'map' } }, function() {
+      markers = handler.addMarkers(<%= raw @hash.to_json %>);
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+      if (markers.length == 0) {
+        handler.getMap().setZoom(2);
+      } else if (markers.length == 1) {
+        handler.getMap().setZoom(14);
+      }
+    });
+  </script>
+<% end %>
