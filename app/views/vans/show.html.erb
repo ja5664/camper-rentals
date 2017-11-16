@@ -6,7 +6,7 @@
     <div class="booking">
       <h1><%= @van.make.upcase %> <%= @van.model.upcase %></h1>
       <h4><%= @van.description %></h4>
-      <h6>£<%= number_with_delimiter(@van.price) %></h6>
+      <h6>£<%= number_with_delimiter(@van.price) %></h6><br>
       <!-- Book Van -->
       <h3><%= link_to "BOOK", new_van_rental_path(@van),class: "btn btn-default" %>
         <!-- Edit Van -->
@@ -37,7 +37,17 @@
       <h5><strong>DETAILS</strong></h5>
       <ul-inline>
         <li><i class="fa fa-bed" aria-hidden="true"></i>&nbsp
-          <%= @van.bed %> bed(s) | <%= @van.sleep %> person(s)</li>
+          <% if @van.bed == 1 %>
+            <%= @van.bed %> bed |
+          <% else %>
+            <%= @van.bed %> beds |
+          <% end %>
+          <% if @van.sleep == 1 %>
+            <%= @van.sleep %> person
+          <% else %>
+            <%= @van.sleep %> people
+          <% end %>
+        </li>
         <li>
           <i class="fa fa-bath" aria-hidden="true"></i>&nbsp
           <%= @van.bathroom ? "Bathroom included" : "Bathroom not included" %>
@@ -69,7 +79,7 @@
       </h5>
       <!-- Pop Up -->
       <ul-inline>
-        <% @van.reviews.last(3).each do |review| %>
+        <% @van.reviews.last(5).each do |review| %>
           <li>
             <% review.score.times do %>
               <i class="fa fa-star"></i>
@@ -77,9 +87,9 @@
             <% (5 - review.score).times do %>
               <i class="fa fa-star-o"></i>
             <% end %>
-            - <%= review.user_id %> | <%= review.created_at.strftime("%d %b %Y") %> &nbsp
+            - <%= User.find(review.user_id).email.upcase %> | <%= review.created_at.strftime("%d %b %Y") %> &nbsp
             <!-- Pop Up "Link" -->
-            <div class="popup" onclick="myFunction()">
+            <div class="popup" id="popupclick" onclick >
               <div class="icon"><i class="fa fa-search" aria-hidden="true"></i></div>
               <!-- Pop Up Display -->
               <span class="popuptext" id="popup-display">
@@ -92,7 +102,7 @@
                   <% end %>
                 </p>
                 <p><%= review.description %></p>
-                <p><%= cl_image_tag review.photo %></p>
+                <p><%= cl_image_tag review.photo, height: 130, width: 130, crop: :fill %></p>
               </span>
               </div>
           </li>
@@ -207,10 +217,20 @@
         handler.getMap().setZoom(14);
       });
     // Pop Up
-    function myFunction() {
-      var popup = document.getElementById("popup-display");
-      popup.classList.toggle("show");
-    }
+
+    // popup.classList.toggle("show");
+
+        var popup = document.querySelectorAll("#popupclick");
+        popup.forEach(function(value) {
+          id = 1;
+          value.classList.add(`popup${id}`);
+          id = id + 1;
+          });
+        popup.forEach(function(element) {
+          element.addEventListener("click", (event) => {
+            element.children[1].classList.toggle("show")
+          })
+        });
   </script>
 <% end %>
 

@@ -2,7 +2,7 @@ class ReviewsController < ApplicationController
   before_action :set_van, only: [:new, :create]
 
   def index
-    @reviews = Review.all
+    @reviews = policy_scope(Review).order(created_at: :desc)
   end
 
   def new
