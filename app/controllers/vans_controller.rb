@@ -3,8 +3,7 @@ class VansController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :new, :create]
 
   def index
-    @vans = policy_scope(Van).order(created_at: :desc)
-    @vans = Van.where.not(latitude: nil, longitude: nil)
+    @vans = policy_scope(Van).where.not(latitude: nil, longitude: nil).order(created_at: :desc)
 
     @hash = Gmaps4rails.build_markers(@vans) do |van, marker|
       marker.lat van.latitude
@@ -15,8 +14,9 @@ class VansController < ApplicationController
   def show
     authorize @van
     @rental = Rental.new
-    @van = Van.find(params[:id])
+    # @van = Van.find(params[:id])
     @van_coordinates = { lat: @van.latitude, lng: @van.longitude }
+    @van = Van.find(params[:id]).where.not(latitude: nil, longitude: nil)
   end
 
   def new
