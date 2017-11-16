@@ -7,9 +7,9 @@ Rails.application.routes.draw do
 
   resources :vans do
     resources :rentals, only: [:index, :new, :create]
-    resources :reviews, only: [:new, :create]
+    resources :reviews, only: [:index, :new, :create]
   end
 
   resources :rentals, only: [:show, :edit, :update, :destroy]
-  resources :reviews, only: [:show, :edit, :update, :destroy]
+  resources :reviews, only: [:edit, :update, :destroy]
 end
