@@ -1,131 +1,136 @@
 <div class="display">
   <!-- Banner -->
   <% photo_url = @van.photo? ? @van.photo : 'lix2bqmp4kzdpu4sqjiy' %>
-  <div class="image spacing" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= cl_image_path photo_url %>)">
+  <div class="image" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= cl_image_path photo_url %>)">
     <!-- Title and Booking -->
     <div class="booking">
       <h1><%= @van.make.upcase %> <%= @van.model.upcase %></h1>
       <h4><%= @van.description %></h4>
       <h6>£<%= number_with_delimiter(@van.price) %></h6>
-      <h3><%= link_to "BOOK", new_van_rental_path(@van),class: "btn btn-default" %></h3>
+      <!-- Book Van -->
+      <h3><%= link_to "BOOK", new_van_rental_path(@van),class: "btn btn-default" %>
+        <!-- Edit Van -->
+        <% if policy(@van).edit? %>
+          <%= link_to "EDIT", edit_van_path(@van), class: "btn btn-default" %>
+        <% end %>
+        <!-- Delete Van -->
+        <% if policy(@van).destroy? %>
+          <%= link_to "DELETE", van_path(@van), class: "btn btn-default", method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
+        <% end %>
+      </h3>
+
     </div>
   </div>
 
   <!-- Description -->
-  <div class="description spacing">
-    <h5><strong>Latitude: <%= @van.latitude %></strong></h5>
-    <h5><strong>Latitude: <%= @van.longitude %></strong></h5>
+  <div class="map">
+    <div class="spacing">
+      <h5><strong>Latitude: <%= @van.latitude %></strong></h5>
+      <h5><strong>Latitude: <%= @van.longitude %></strong></h5>
+    </div>
   </div>
 
   <!-- Details -->
-  <div class="details spacing">
-    <!-- Geocoding on location? -->
-    <h5><strong>LOCATION</strong></h5>
-    <p><%= @van.location %></p>
-    <br>
-    <h5><strong>DETAILS</strong></h5>
-    <ul-inline>
-      <li><i class="fa fa-bed" aria-hidden="true"></i>&nbsp
-        <%= @van.bed %> bed(s) | <%= @van.sleep %> person(s)</li>
-      <li>
-        <i class="fa fa-bath" aria-hidden="true"></i>&nbsp
-        <%= @van.bathroom ? "Bathroom included" : "Bathroom not included" %>
-      </li>
-      <li>
-        <i class="fa fa-fire" aria-hidden="true"></i>&nbsp
-        <%= @van.kitchen ? "Kitchen included" : "Kitchen not included" %></li>
-    </ul>
+  <div class="details">
+    <div class="spacing">
+      <!-- Geocoding on location? -->
+      <h5><strong>LOCATION</strong></h5>
+      <p><%= @van.location %></p>
+      <br>
+      <h5><strong>DETAILS</strong></h5>
+      <ul-inline>
+        <li><i class="fa fa-bed" aria-hidden="true"></i>&nbsp
+          <%= @van.bed %> bed(s) | <%= @van.sleep %> person(s)</li>
+        <li>
+          <i class="fa fa-bath" aria-hidden="true"></i>&nbsp
+          <%= @van.bathroom ? "Bathroom included" : "Bathroom not included" %>
+        </li>
+        <li>
+          <i class="fa fa-fire" aria-hidden="true"></i>&nbsp
+          <%= @van.kitchen ? "Kitchen included" : "Kitchen not included" %></li>
+      </ul>
+    </div>
   </div>
 
   <!-- Reviews -->
-  <div class="reviews spacing">
-    <h5>
-      <strong>REVIEWS</strong>&nbsp
-      <% if @van.reviews.count == 1 %>
-        (<%= @van.reviews.count %> review)
-      <% else %>
-        (<%= @van.reviews.count %> reviews)
-      <% end %>
-      &nbsp
-      <div class="link">
-        <!-- Add Reviews -->
-        <%= link_to "ADD", new_van_review_path(@van) %> &nbsp|&nbsp
-        <!-- List All Reviews for Van -->
-        <%= link_to "SHOW ALL", review_path(@van) %>
-      </div>
-    </h5>
-    <!-- Listing of last three individual reviews -->
-
-<!-- ORIGINAL -->
-<!-- <ul-inline>
-      <% @van.reviews.last(3).each do |review| %>
-        <li>
-          <% review.score.times do %>
-            <i class="fa fa-star"></i>
-          <% end %>
-          <% (5 - review.score).times do %>
-            <i class="fa fa-star-o"></i>
-          <% end %>
-          <%= review.description %>
-        </li>
+  <div class="reviews">
+    <div class="spacing">
+      <h5>
+        <strong>REVIEWS</strong>&nbsp
+        <% if @van.reviews.count == 1 %>
+          (<%= @van.reviews.count %> review)
+        <% else %>
+          (<%= @van.reviews.count %> reviews)
         <% end %>
-    </ul-inline> -->
+        &nbsp
+        <div class="link">
+          <!-- Add Reviews -->
+          <%= link_to "ADD", new_van_review_path(@van) %> &nbsp|&nbsp
+          <!-- List All Reviews for Van -->
+          <%= link_to "SHOW ALL", review_path(@van) %>
+        </div>
+      </h5>
+      <!-- Listing of last three individual reviews -->
 
-    <!-- Pop Up Test -->
+  <!-- ORIGINAL -->
+  <!-- <ul-inline>
+        <% @van.reviews.last(3).each do |review| %>
+          <li>
+            <% review.score.times do %>
+              <i class="fa fa-star"></i>
+            <% end %>
+            <% (5 - review.score).times do %>
+              <i class="fa fa-star-o"></i>
+            <% end %>
+            <%= review.description %>
+          </li>
+          <% end %>
+      </ul-inline> -->
 
-    <ul-inline>
-      <% @van.reviews.last(3).each do |review| %>
-        <li>
-          <% review.score.times do %>
-            <i class="fa fa-star"></i>
-          <% end %>
-          <% (5 - review.score).times do %>
-            <i class="fa fa-star-o"></i>
-          <% end %>
-          - <%= review.user_id %> | <%= review.created_at.strftime("%d %b %Y") %> &nbsp
-          <!-- Pop Up "Link" -->
-          <div class="popup" onclick="myFunction()">
-            <div class="icon"><i class="fa fa-search" aria-hidden="true"></i></div>
-            <!-- Pop Up Display -->
-            <span class="popuptext" id="popup-display">
-              <p>
-                <% review.score.times do %>
-                  <i class="fa fa-star"></i>
-                <% end %>
-                <% (5 - review.score).times do %>
-                  <i class="fa fa-star-o"></i>
-                <% end %>
-              </p>
-              <p><%= review.description %></p>
-              <p><%= cl_image_tag review.photo %></p>
-            </span>
-            </div>
-        </li>
+      <!-- Pop Up -->
+      <ul-inline>
+        <% @van.reviews.last(3).each do |review| %>
+          <li>
+            <% review.score.times do %>
+              <i class="fa fa-star"></i>
+            <% end %>
+            <% (5 - review.score).times do %>
+              <i class="fa fa-star-o"></i>
+            <% end %>
+            - <%= review.user_id %> | <%= review.created_at.strftime("%d %b %Y") %> &nbsp
+            <!-- Pop Up "Link" -->
+            <div class="popup" onclick="myFunction()">
+              <div class="icon"><i class="fa fa-search" aria-hidden="true"></i></div>
+              <!-- Pop Up Display -->
+              <span class="popuptext" id="popup-display">
+                <p>
+                  <% review.score.times do %>
+                    <i class="fa fa-star"></i>
+                  <% end %>
+                  <% (5 - review.score).times do %>
+                    <i class="fa fa-star-o"></i>
+                  <% end %>
+                </p>
+                <p><%= review.description %></p>
+                <p><%= cl_image_tag review.photo %></p>
+              </span>
+              </div>
+          </li>
+        <% end %>
+      </ul-inline>
+      <!-- Pop Up JavaScript -->
+      <%= content_for(:after_js) do %>
+        <script>
+          function myFunction() {
+            var popup = document.getElementById("popup-display");
+            popup.classList.toggle("show");
+          }
+        </script>
       <% end %>
-    </ul-inline>
-    <!-- Pop Up JavaScript -->
-    <%= content_for(:after_js) do %>
-      <script>
-        function myFunction() {
-          var popup = document.getElementById("popup-display");
-          popup.classList.toggle("show");
-        }
-      </script>
-    <% end %>
+    </div>
   </div>
 </div>
 
-<div class="link padding">
-  <!-- Display All Vans -->
-  <%= link_to "BACK TO RESULTS", vans_path %>
-  <!-- Edit Van -->
-  <% if policy(@van).edit? %>
-    &nbsp|&nbsp <%= link_to "EDIT", edit_van_path(@van) %> &nbsp|&nbsp
-  <% end %>
-  <!-- Delete Van -->
-  <% if policy(@van).destroy? %>
-    <%= link_to "DELETE", van_path(@van), method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
-  <% end %>
-</div>
+
 
 <%= content_for(:title, @van.model) %>
