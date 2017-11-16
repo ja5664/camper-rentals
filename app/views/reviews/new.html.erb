@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>New review for Van-owner - <%= @van.user_id %></h1>
+  <h1>New review for <%= @van.make %> <%= @van.model %></h1>
 
   <%= simple_form_for [@van, @review] do |f| %>
     <%= f.input :score, collection: 1..5 %>
@@ -8,6 +8,10 @@
     <%= f.input :photo_cache, as: :hidden %>
     <%= f.submit class: 'btn btn-primary' %>
   <% end %>
+  <br>
+  <%= link_to van_path(@van) do %>
+    <i class="fa fa-undo" aria-hidden="true"></i> Back to Van
+  <% end %>
 </div>
 
-<%= content_for(:title, 'New review - Le Campeur') %>
+<%= content_for(:title, 'New Review - Le Campeur') %>

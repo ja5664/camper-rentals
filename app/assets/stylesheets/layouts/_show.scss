@@ -1,47 +1,79 @@
 // CSS for Vans show page //
-.title {
-  padding-left: 30px;
+.padding {
+  padding-left: 35px;
 }
 
 .display {
   display: grid;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 50% 50%;
   grid-template-columns: 1fr 1fr 1fr;
-  height: calc(100vh - 150px);
-  width: 97%;
-  margin: auto;
+  height: calc(100vh - 50px)
 }
 
-.description {
-  border: 1px solid black;
+.location {
+  grid-row: 2 / span 1;
+  border-right: 1px solid #9099A2;
+}
+
+.location:hover, .details:hover, .reviews:hover {
+    background-color: rgba(150, 133, 143, 0.3);
+    transition: 0.5s;
 }
 
 .details {
-  border: 1px solid black;
   grid-column: 2 / span 1;
+  grid-row: 2 / span 1;
 
   ul-inline {
     list-style: none;
+    font-size: 16px;
   }
 }
 
-.booking-form {
-  border: 1px solid black;
-  grid-column: 3 / span 1;
-  grid-row: 1 / span 2;
+.image {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  grid-column: 1 / span 3;
+  grid-row: 1 / span 1;
+  background-position: center;
+  background-size: cover;
+  border-left: 1px solid #9099A2;
+  position: sticky !important;
+  top: 0px !important;
+
+  .booking {
+    text-align: center;
+    color: white;
+
+    h1, h3 {
+      margin-top: 0px;
+    }
+  }
 }
 
 .reviews {
-  border: 1px solid black;
   grid-row: 2 / span 1;
-  grid-column: 1 / span 2;
+  grid-column: 3 / span 1;
+  border-left: 1px solid #9099A2;
 
   ul-inline {
     list-style: none;
+    font-size: 16px;
+  }
+
+  .link {
+    text-align: left;
+    font-size: 14px;
+    font-family: "Source Sans Pro", "sans-serif";
   }
 }
 
 .spacing {
-  margin: 20px;
-  padding: 20px;
+  margin: 10px;
+  padding: 10px;
+}
+
+.icon {
+  font-size: 12px;
 }

@@ -11,16 +11,27 @@
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%#= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
   </head>
+
   <body>
-    <!-- Navigation Bar -->
     <%= render "shared/flashes" %>
     <%= render "shared/navbar" %>
-    <%= yield %>
-    <!-- Devise flash messages -->
+    <%= render "shared/searchbar" %>
 
-    <!-- End of Devise flash messages code -->
+    <div class="content">
+      <%= yield %>
+    </div>
+
+    <%= render "shared/footer" %>
+
+    <%= javascript_include_tag "https://maps.google.com/maps/api/js?libraries=places&key=#{ENV['GOOGLE_API_BROWSER_KEY']}" %>
+
+    <!-- Geocoding Javascript Tags -->
+    <%= javascript_include_tag "https://cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/markerclusterer/src/markerclusterer_compiled.js" %>
+    <%= javascript_include_tag "https://cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js" %>
     <%= javascript_include_tag 'application' %>
-    <%= cloudinary_js_config %>
-    <%= javascript_pack_tag 'application' %>
+    <!-- Geocoding with API Key -->
+
+    <%= yield(:after_js) %>
+     <!-- <%= cloudinary_js_config %> -->
   </body>
 </html>
