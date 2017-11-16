@@ -26,7 +26,7 @@
 <!-- JavaScript: Toggle Map Display -->
 <% content_for(:after_js) do %>
   <script>
-
+    // Snazzy Maps
     var styles = [
                   {
                       "featureType": "poi",
@@ -227,7 +227,7 @@
                       ]
                   }
               ];
-
+    // Toggle Button for Map Display
     const map = document.getElementById("map");
     document.getElementById('display-button').onclick = function() {
       map.classList.toggle("shown-map")
@@ -238,8 +238,6 @@
     handler.buildMap({
       provider: {
         styles: styles
-        // pass in other Google Maps API options here
-        // => https://developers.google.com/maps/documentation/javascript/reference#MapOptions
       }, internal: { id: 'map' } }, function() {
       markers = handler.addMarkers(<%= raw @hash.to_json %>);
       handler.bounds.extendWith(markers);
