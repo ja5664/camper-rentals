@@ -14,9 +14,9 @@ class VansController < ApplicationController
   def show
     authorize @van
     @rental = Rental.new
-    # @van = Van.find(params[:id])
+    @van = Van.find(params[:id])
     @van_coordinates = { lat: @van.latitude, lng: @van.longitude }
-    @van = Van.find(params[:id]).where.not(latitude: nil, longitude: nil)
+    # @van = Van.find(params[:id]).where.not(latitude: nil, longitude: nil)
   end
 
   def new
