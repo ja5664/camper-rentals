@@ -9,7 +9,6 @@ class VansController < ApplicationController
       marker.lat van.latitude
       marker.lng van.longitude
     end
-
     @results = params[:query].present? ? Van.global_search(params[:query]) : Van.all
   end
 
