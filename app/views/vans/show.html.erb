@@ -39,17 +39,10 @@
       <br>
       <h5><strong>DETAILS</strong></h5>
       <ul-inline>
-        <li><i class="fa fa-bed" aria-hidden="true"></i>&nbsp
-          <% if @van.bed == 1 %>
-            <%= @van.bed %> bed |
-          <% else %>
-            <%= @van.bed %> beds |
-          <% end %>
-          <% if @van.sleep == 1 %>
-            <%= @van.sleep %> person
-          <% else %>
-            <%= @van.sleep %> people
-          <% end %>
+        <li>
+          <i class="fa fa-bed" aria-hidden="true"></i>&nbsp
+          <%= pluralize @van.bed, "bed" %> |
+          <%= pluralize @van.sleep, "person" %>
         </li>
         <li>
           <i class="fa fa-bath" aria-hidden="true"></i>&nbsp
@@ -67,11 +60,7 @@
     <div class="spacing">
       <h5>
         <strong>REVIEWS</strong>&nbsp
-        <% if @van.reviews.count == 1 %>
-          (<%= @van.reviews.count %> review)
-        <% else %>
-          (<%= @van.reviews.count %> reviews)
-        <% end %>
+        (<%= pluralize @van.reviews.count, "review" %>)
       </h5>
       <p>
         <div class="link">
@@ -115,7 +104,6 @@
                     </p>
               </span>
               </div>
-              <%= link_to "DETAILS", review_path(review) %>
           </li>
         <% end %>
       </ul-inline>
