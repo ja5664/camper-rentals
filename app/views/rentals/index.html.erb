@@ -1,32 +1,21 @@
 <div class="show-banner" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('http://res.cloudinary.com/joycelewagon/image/upload/v1510750617/hfxsxwnvfij3w15mvccl.jpg')">
   <div class="booking">
-    <h1><%=  @rented_message_one %></h1>
-    <h1>Time to get excited <%= @user_name.capitalize %></h1>
-    <% if @rentals.count == 0 %>
-    <h2>No trips booked yet - why not book one!</h2>
-    <% elsif @rentals.count == 1 %>
-    <h2>You have <%= @rentals.count%> trip booked!</h2>
-    <% else %>
-    <h2>You have <%= @rentals.count%> trips booked!</h2>
-    <% end %>
-
-    <% if Van.where(user_id: @user) %>
-    <% @user_owns_a_van = true %>
-    <% end %>
-
-    <% if @user_owns_a_van %>
-    <% @vans_renting = Rental.where(user_id: @user) %>
-    <h1>Your vans are rented <%= Rental.where(user_id: @user).count %> times</h1>
-    <% end %>
+    <h1><%= @status %></h1>
+    <h1>Time to get excited <%= @user_name %></h1>
+    <h1><%= @rented_message_one%></h1>
+    <h2><%= @rented_message_two%></h2>
+    <h2><%= @status_two%></h2>
+    <h2><%= @status_three%></h2>
   </div>
+
 </div>
 
 <% if @rentals.count != 1 %>
 
-<div class="container-m">
+<div class="rentals-card-container">
   <div class="row">
    <% @rentals.each_with_index do |rental, index| %>
-   <div class="col-xs-4">
+   <div class="<%= @counter%>">
    <% @van = Van.find(rental.van_id) %>
    <% @van_owner = User.find(@van.user_id) %>
    <% @rating = Review.where(van_id: @van).average(:score).to_i %>
@@ -72,6 +61,8 @@
 </div>
 <% end %>
   </div>
+  <% raise %>
+</div>
   <% else %>
 
   <div class="cards">
