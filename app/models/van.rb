@@ -17,6 +17,5 @@ class Van < ApplicationRecord
     associated_against: {
       rentals: [ :start_date, :end_date ]
     }
-
 end
 
