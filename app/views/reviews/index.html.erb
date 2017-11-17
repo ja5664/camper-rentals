@@ -1,35 +1,46 @@
 <div class="review-list">
-  <ul-inline>
-    <h1>All Reviews</h1>
-
     <!-- Review Banner -->
-    <div class="review-banner" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= cl_image_path @van.photo  %>)">
+    <div class="banner-image" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= cl_image_path @van.photo  %>)">
+      <div class="title">
+        <h1><%= @van.user.first_name %>'s <%= @van.make.capitalize %> <%= @van.model.capitalize %></h1>
+        <p><%= @van.location %></p>
+        <!-- Add Review -->
+        <% if policy(@van).edit? == false %>
+          <h3><%= link_to "ADD REVIEW", new_van_review_path(@van), class: "btn btn-default" %>
+        <% end %>
+        <!-- Back to Van Details -->
+        <%= link_to "VAN DETAILS", van_path(@van), class: "btn btn-default" %></h3>
+      </div>
     </div>
 
     <!-- Review List -->
-    <% @reviews.each do |review| %>
-      <div class="comment">
-        <div class="review-content">
-          <!-- Ratings -->
-          <% review.score.times do %>
-            <i class="fa fa-star"></i>
-          <% end %>
-          <% (5 - review.score).times do %>
-            <i class="fa fa-star-o"></i>
-          <% end %>
-          <!-- User and Date/Time -->
-          <p>By <strong><%= User.find(review.user_id).email %></strong> on <strong><%= review.created_at.strftime("%d %b %Y") %></strong></p>
-          <!-- Description -->
-          <%= review.description %>
+    <div class="review-wrapper">
+      <ul-inline>
+      <% @reviews.each do |review| %>
+        <div class="comment">
+          <div class="review-content">
+            <!-- Ratings -->
+            <% review.score.times do %>
+              <i class="fa fa-star"></i>
+            <% end %>
+            <% (5 - review.score).times do %>
+              <i class="fa fa-star-o"></i>
+            <% end %>
+            <!-- User and Date/Time -->
+            <p>By <strong><%= @van.user.first_name %></strong> on <strong><%= review.created_at.strftime("%d %b %Y") %></strong></p>
+            <!-- Description -->
+            <%= review.description %>
+          </div>
+          <div class="review-photo">
+            <% if review.photo? %>
+              <%= cl_image_tag review.photo, height: 150, width: 250, crop: :fill %>
+            <% end %>
+          </div>
         </div>
-        <div class="review-photo">
-          <% if review.photo? %>
-            <%= cl_image_tag review.photo, height: 150, width: 250, crop: :fill %>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
-  </ul-inline>
+      <% end %>
+      </ul-inline>
+    </div>
 </div>
 
-<%= content_for(:title, "All Reviews") %>
+<%= content_for(:title, @van.model) %>
+
