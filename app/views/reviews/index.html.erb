@@ -1,6 +1,12 @@
 <div class="review-list">
   <ul-inline>
     <h1>All Reviews</h1>
+
+    <!-- Review Banner -->
+    <div class="review-banner" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= cl_image_path @van.photo  %>)">
+    </div>
+
+    <!-- Review List -->
     <% @reviews.each do |review| %>
       <div class="comment">
         <div class="review-content">

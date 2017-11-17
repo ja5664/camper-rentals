@@ -2,7 +2,8 @@ class ReviewsController < ApplicationController
   before_action :set_van, only: [:new, :create]
 
   def index
-    @reviews = policy_scope(Review).order(created_at: :desc)
+    @van = Van.find(params[:van_id])
+    @reviews = policy_scope(@van.reviews).order(created_at: :desc)
   end
 
   def new
