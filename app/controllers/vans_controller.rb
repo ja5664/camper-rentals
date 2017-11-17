@@ -1,6 +1,6 @@
 class VansController < ApplicationController
   before_action :set_van, only: [:show, :edit, :update, :destroy]
-  skip_before_action :authenticate_user!, only: [:index, :new, :create]
+  skip_before_action :authenticate_user!, only: [:index]
 
   def index
     @vans = policy_scope(Van).where.not(latitude: nil, longitude: nil).order(created_at: :desc)
