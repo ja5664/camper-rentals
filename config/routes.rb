@@ -11,5 +11,5 @@ Rails.application.routes.draw do
   end
 
   resources :rentals, only: [:show, :edit, :update, :destroy]
-  resources :reviews, only: [:edit, :update, :destroy]
+  resources :reviews, only: [:show, :edit, :update, :destroy]
 end
