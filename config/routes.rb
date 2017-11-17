@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'pages/home'
 
-  devise_for :users
+  devise_for :users, :controllers => {registrations: 'registrations'}
   mount Attachinary::Engine => "/attachinary"
   root to: "pages#home"
 
@@ -12,4 +12,5 @@ Rails.application.routes.draw do
 
   resources :rentals, only: [:index, :show, :edit, :update, :destroy]
   resources :reviews, only: [:show, :edit, :update, :destroy]
+  get 'users/:id/dashboard', to: 'users#dashboard', as: 'dashboard'
 end
