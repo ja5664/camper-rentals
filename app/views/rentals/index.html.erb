@@ -8,6 +8,8 @@
     <h2><%= @status_three%></h2>
   </div>
 
+
+
 </div>
 
 <% if @rentals.count != 1 %>
@@ -29,6 +31,7 @@
     <br/>
     <span class="card__date__month"><%= rental.start_date.strftime("%b") %></span>
   </div>
+
 
   <div class="card__body">
     <div class="card__category"><%= days %> days until you are off to <%= rental.van.location %></div>

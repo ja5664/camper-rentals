@@ -22,13 +22,12 @@ class RentalsController < ApplicationController
 
     @next_trip = @my_rentals.order(start_date: :desc).limit(1)
 
+    if @next_trip.exists?
     @next_van = @next_trip[0].van_id
     @next_trip_start =@next_trip[0].start_date
-
     @days_to_go = (@next_trip_start - Date.today + 1).to_i
-
-
     @next_location = Van.find(@next_van).location
+    end
 
 
     # Setting message based on trip count
@@ -37,18 +36,19 @@ class RentalsController < ApplicationController
     elsif @my_rentals.count == 1
       @status = "You have #{@rentals.count} trip booked!"
       @status_two = "You are off to #{@next_location}"
-      @days_to_go = 1 ? @status_three = "Only #{@days_to_go} day to go!" : @status_three = "Only #{@days_to_go} days to go!"
+      @days_to_go == 1 ? @status_three = "Only #{@days_to_go} day to go!" : @status_three = "Only #{@days_to_go} days to go!"
     else
       @status = "You have #{@rentals.count} trips booked!"
 
     end
 
     owned_vans = Van.where(user_id: 1).ids
+    no_of_rentals = Rental.where(van_id: owned_vans).count
     # Setting status for van owners
     @user_owns_a_van = Van.where(user_id: @user.id).exists?
-    if @user_owns_a_van && Rental.where(van_id: owned_vans).count > 0
-      @rented_message_one = "Your vans are rented #{Rental.where(user_id: @user).count} times"
-      @rented_message_two = "Superb - with the money from those you can have some beers!"
+    if @user_owns_a_van && no_of_rentals > 0
+      no_of_rentals == 1 ? @rented_message_one = "You have one #{no_of_rentals} rental" : "Sweet you have one #{no_of_rentals} rentals"
+      no_of_rentals == 1 ? @rented_message_two = "Superb - with the money from those you can have some beers!" : "Wow - with those rentals you will be a millionaire!"
     elsif @user_owns_a_van == true
       @rented_message_one = "No rentals just yet why edit your van description to make it even better!"
       @rented_message_two = "Or on second thoughts take it on a road trip!"
