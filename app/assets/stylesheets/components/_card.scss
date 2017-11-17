@@ -82,8 +82,8 @@ body{
 
 .booking__card {
   position: absolute;
-margin-top: 10px;
-margin-left: 20px;
+  margin-top: 10px;
+  margin-left: 20px;
   // left: 50%;
   // top: 50%;
     // left: 50%;
@@ -240,8 +240,6 @@ margin-left: 20px;
   transition: opacity $duration -$delay, transform $duration -$delay;
   transition-delay: 0s;
 
-
-
   .booking__card:hover &{
     opacity:1;
     transform: translateY(0);
@@ -270,4 +268,7 @@ margin-left: 20px;
   }
 }
 
+.rentals-card-container{
+
+}
 

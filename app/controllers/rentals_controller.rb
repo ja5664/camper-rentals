@@ -6,29 +6,53 @@ class RentalsController < ApplicationController
 
   def index
     @rentals = policy_scope(Rental).order(created_at: :desc)
+    @my_rentals = Rental.where(user_id: @user)
     @user_name = @user.first_name
     weather_forecast
+    @counter = "col-xs-4"
+
+    if @rentals.count == 1
+      @counter = "col-xs-12"
+    elsif @rentals.count == 2
+      @counter = "col-xs-6"
+    else
+      @counter = "col-xs-4"
+    end
+
+
+    @next_trip = @my_rentals.order(start_date: :desc).limit(1)
+
+    @next_van = @next_trip[0].van_id
+    @next_trip_start =@next_trip[0].start_date
+
+    @days_to_go = (@next_trip_start - Date.today + 1).to_i
+
+
+    @next_location = Van.find(@next_van).location
+
 
     # Setting message based on trip count
-    if @rentals.count == 0
+    if @my_rentals.count == 0
       @status = "No trips booked yet - why not book one?"
-    elsif @rentals.count == 1
+    elsif @my_rentals.count == 1
       @status = "You have #{@rentals.count} trip booked!"
+      @status_two = "You are off to #{@next_location}"
+      @days_to_go = 1 ? @status_three = "Only #{@days_to_go} day to go!" : @status_three = "Only #{@days_to_go} days to go!"
     else
       @status = "You have #{@rentals.count} trips booked!"
+
     end
 
+    owned_vans = Van.where(user_id: 1).ids
     # Setting status for van owners
-    if Van.where(user_id: @user)
-      @user_owns_a_van = true
-    end
-
-    if @user_owns_a_van && Rental.where(user_id: @user).count > 0
+    @user_owns_a_van = Van.where(user_id: @user.id).exists?
+    if @user_owns_a_van && Rental.where(van_id: owned_vans).count > 0
       @rented_message_one = "Your vans are rented #{Rental.where(user_id: @user).count} times"
       @rented_message_two = "Superb - with the money from those you can have some beers!"
-    else
+    elsif @user_owns_a_van == true
       @rented_message_one = "No rentals just yet why edit your van description to make it even better!"
       @rented_message_two = "Or on second thoughts take it on a road trip!"
+    else
     end
   end
 
