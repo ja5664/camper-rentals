@@ -1,202 +1,60 @@
-<div class="show-banner" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('http://res.cloudinary.com/joycelewagon/image/upload/v1510750617/hfxsxwnvfij3w15mvccl.jpg')">
+<div class="show-banner" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('http://res.cloudinary.com/joycelewagon/image/upload/v1510750617/hfxsxwnvfij3w15mvccl.jpg')">
   <div class="booking">
-    <h1><%= @status %></h1>
-    <h1>Time to get excited <%= @user_name %></h1>
-    <h1><%= @rented_message_one%></h1>
-    <h2><%= @rented_message_two%></h2>
-    <h2><%= @status_two%></h2>
-    <h2><%= @status_three%></h2>
-    <h2><%= @status_four%></h2>
+    <h1><%= @status %> Time to get excited <%= @user_name %></h1>
+    <h2><%= @rented_message_one %> <%= @rented_message_two %></h2>
+    <h2><%= @status_two %> <%= @status_three %> <%= @status_four %></h2>
   </div>
-
-
 </div>
 
-<% if @rentals.count != 1 %>
-
-<div class="rentals-card-container">
+<div class="container margin-top">
   <div class="row">
-   <% @rentals.each_with_index do |rental, index| %>
-   <div class="<%= @counter%>">
-   <% @van = Van.find(rental.van_id) %>
-   <% @van_owner = User.find(@van.user_id) %>
-   <% @rating = Review.where(van_id: @van).average(:score).to_i %>
-   <% days = (rental.start_date - Date.today).to_i %>
-  <div class="booking__card text-center">
-  <div class="card__thumb">
-    <%= cl_image_tag rental.van.photo, width: 800, height: 400, crop: :fill %>
-  </div>
-  <div class="card__date">
-    <span class="card__date__day"><%= rental.start_date.strftime("%d") %></span>
-    <br/>
-    <span class="card__date__month"><%= rental.start_date.strftime("%b") %></span>
-  </div>
+    <% @rentals.each do |rental| %>
+    <div class="col-xs-4">
+      <% @van = rental.van %>
+      <% @van_owner = @van.user %>
+      <% @rating = Review.where(van: @van).average(:score).to_i %>
+      <% days = (rental.start_date - Date.today).to_i %>
+
+      <div class="booking__card text-center">
+        <div class="card__thumb" style="background-image: url('<%= cl_image_path rental.van.photo, width: 800, height: 400, crop: :fill %>')">
+        </div>
+        <div class="card__date">
+          <span class="card__date__day"><%= rental.start_date.strftime("%d") %></span>
+          <br/>
+          <span class="card__date__month"><%= rental.start_date.strftime("%b") %></span>
+        </div>
 
 
-  <div class="card__body">
-    <div class="card__category"><%= days %> days until you are off to <%= rental.van.location %></div>
-    <h2 class="card__title"></h2>
-    <div class="card__subtitle"><%= rental.van.make %></div>
-    <div class="card__description">
-      <h5><strong>DETAILS</strong></h5>
-        <li><i class="fa fa-bed" aria-hidden="true"></i>&nbsp
-          <%= @van.bed %> bed(s) | <%= @van.sleep %> person(s)</li>
-        <li>
-          <i class="fa fa-bath" aria-hidden="true"></i>&nbsp
-          <%= @van.bathroom ? "Bathroom included" : "Bathroom not included" %>
-        </li>
-        <li>
-          <i class="fa fa-fire" aria-hidden="true"></i>&nbsp
-          <%= @van.kitchen ? "Kitchen included" : "Kitchen not included" %></li>
-      </ul>
-    </div>
-  </div>
-  <div class="card__footer">
-    <span class="icon ion-clock"></span>
+        <div class="card__body">
+          <div class="card__category"><%= days %> days until you are off to <%= rental.van.location %></div>
+          <h2 class="card__title"></h2>
+          <div class="card__subtitle"><%= rental.van.make %></div>
+          <div class="card__description">
+            <h5><strong>DETAILS</strong></h5>
+            <ul>
+              <li>
+                <i class="fa fa-bed" aria-hidden="true"></i>&nbsp
+                <%= @van.bed %> bed(s) | <%= @van.sleep %> person(s)
+              </li>
+              <li>
+                <i class="fa fa-bath" aria-hidden="true"></i>&nbsp
+                <%= @van.bathroom ? "Bathroom included" : "Bathroom not included" %>
+              </li>
+              <li>
+                <i class="fa fa-fire" aria-hidden="true"></i>&nbsp
+                <%= @van.kitchen ? "Kitchen included" : "Kitchen not included" %>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="card__footer">
+          <span class="icon ion-clock"></span>
           <% if @rating != 0 %>
           Average rating <%= @rating %>
           <% else %>
           Not yet rated!
           <% end %>
-    <span class="icon ion-chatbox"></span><a href="#"> 42 comments</a>
-   </div>
-</div>
-</div>
-<% end %>
-  </div>
-</div>
-  <% else %>
-
-  <div class="cards">
-  <% @rentals.each_with_index do |rental, index| %>
-   <% @van = Van.find(rental.van_id) %>
-   <% @van_owner = User.find(@van.user_id) %>
-   <% @rating = Review.where(van_id: @van).average(:score).to_i %>
-   <% days = (rental.start_date - Date.today).to_i %>
-    <div class="card" style="background-image: url(<%= cl_image_path rental.van.photo, width: 800, height: 400, crop: :fill %>);">
-      <div class="card-body">
-        <h4><%= @van.make %></h4>
-        <h6><light><%= @van.location %></light></h6>
-        <h6><light>£<%= number_with_delimiter(@van.price) %></light></h6>
+          <span class="icon ion-chatbox"></span><a href="#"></a>
+        </div>
       </div>
     </div>
-  <% end %>
-</div>
-  <% end %>
-
-<%= content_for(:title, 'Dashboard - Le Campeur') %>
-<!--
-
-  <div class="show-banner" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('http://res.cloudinary.com/joycelewagon/image/upload/v1510750617/hfxsxwnvfij3w15mvccl.jpg')">
-  <div class="booking">
-    <h1>Time to get excited <%= @user_email %></h1>
-    <% if @rentals.count == 0 %>
-    <h2>No trips booked yet - why not book one!</h2>
-    <% elsif @rentals.count == 1 %>
-    <h2>You have <%= @rentals.count%> trip booked!</h2>
-    <% else %>
-    <h2>You have <%= @rentals.count%> trips booked!</h2>
-    <% end %>
-
-    <% if Van.where(user_id: @user) %>
-    <% @user_owns_a_van = true %>
-    <% end %>
-
-    <% if @user_owns_a_van %>
-    <% @vans_renting = Rental.where(user_id: @user) %>
-    <h1>Your vans are rented <%= Rental.where(user_id: @user).count %> times</h1>
-    <% end %>
-  </div>
-</div>
-
-<% if @rentals.empty? == false && @user_owns_a_van == true %>
-<div class="booking-container col-xs-6">
-    <div class="row">
-  <div class="left text-center">
-    <div class="booking-cards">
-   <% @rentals.each_with_index do |rental, index| %>
-   <% @van = Van.find(rental.van_id) %>
-   <% @van_owner = User.find(@van.user_id) %>
-   <% @rating = Review.where(van_id: @van).average(:score).to_i %>
-      <div class="booking-card">
-        <div class="booking-card-title">
-          <% days = (rental.start_date - Date.today).to_i %>
-          <h2><%= days %> days until you are off to <%= rental.van.location %></h2>
-        </div>
-        <div class="booking-card-body">
-          <% trip_length = ((rental.end_date - rental.end_date).to_i) + 1 %>
-          <% if days < 6 %>
-            <div class="weather">
-              <% weather = weather_forecast %>
-              <% count = 0 %>
-              <% until count == trip_length do %>
-                <p><%= weather[count] %><p>
-                <% count += 1 %>
-              <% end %>
-            </div>
-            <% else %>
-            <div class="weather">
-              <%= trip_length %>
-            </div>
-          <% end %>
-          <p>Start date:<%= rental.start_date.strftime("%m/%d/%Y") %> ------ End date:<%= rental.end_date.strftime("%m/%d/%Y") %></p>
-          <p><%= rental.van.model %></p>
-          <p>You are renting from<%= @van_owner.email %> and its <%= rental.status %></p>
-          <% if @rating != 0 %>
-          <h2>Average rating <%= @rating %></h2>
-          <% else %>
-          <h2>Not yet rated!</h2>
-          <% end %>
-        </div>
-        <p><%= cl_image_tag rental.van.photo, width: 225, height: 150, crop: :fill %></p>
-    </div>
-  <% end %>
-  </div>
-  <% end %>
-  </div>
-  <div class="right">
-  <div class="booking-cards">
-   <% @rentals.each_with_index do |rental, index| %>
-   <div class="row">
-   <% @van = Van.find(rental.van_id) %>
-   <% @van_owner = User.find(@van.user_id) %>
-   <% @rating = Review.where(van_id: @van).average(:score).to_i %>
-      <div class="booking-card">
-        <div class="booking-card-title">
-          <% days = (rental.start_date - Date.today).to_i %>
-          <h2><%= days %> days until you are off to <%= rental.van.location %></h2>
-        </div>
-        <div class="booking-card-body">
-          <% trip_length = ((rental.end_date - rental.end_date).to_i) + 1 %>
-          <% if days < 6 %>
-            <div class="weather">
-              <% weather = weather_forecast %>
-              <% count = 0 %>
-              <% until count == trip_length do %>
-                <p><%= weather[count] %><p>
-                <% count += 1 %>
-              <% end %>
-            </div>
-            <% else %>
-            <div class="weather">
-              <%= trip_length %>
-            </div>
-          <% end %>
-          <p>Start date:<%= rental.start_date.strftime("%m/%d/%Y") %> ------ End date:<%= rental.end_date.strftime("%m/%d/%Y") %></p>
-          <p><%= rental.van.model %></p>
-          <p>You are renting from<%= @van_owner.email %> and its <%= rental.status %></p>
-          <% if @rating != 0 %>
-          <h2>Average rating <%= @rating %></h2>
-          <% else %>
-          <h2>Not yet rated!</h2>
-          <% end %>
-        </div>
-        <p><%= cl_image_tag rental.van.photo, width: 225, height: 150, crop: :fill %></p>
-    </div>
-  <% end %>
-  </div>
-  </div>
-  </div>
-</div>
-
- -->

@@ -5,60 +5,58 @@ class RentalsController < ApplicationController
     helper_method :weather_forecast
 
   def index
-    @rentals = policy_scope(Rental).order(created_at: :desc)
-    @my_rentals = Rental.where(user_id: @user)
+    @rentals = policy_scope(Rental)
+    @my_rentals = @user.rentals
     @user_name = @user.first_name
-    weather_forecast
-    @counter = "col-xs-4"
 
-    if @rentals.count == 1
-      @counter = "col-xs-12"
-    elsif @rentals.count == 2
-      @counter = "col-xs-6"
-    else
-      @counter = "col-xs-4"
+    # @counter = "col-xs-4"
+    # if @rentals.count == 1
+    #   @counter = "col-xs-12"
+    # elsif @rentals.count == 2
+    #   @counter = "col-xs-6"
+    # else
+    #   @counter = "col-xs-4"
+    # end
+
+
+    @next_trip = @my_rentals.order(start_date: :desc).first
+
+    if @next_trip
+      @next_van = @next_trip.van
+      @latitude = @next_van.longitude
+      @latitude = @next_van.latitude
+      @next_trip_start = @next_trip.start_date
+      @days_to_go = (@next_trip_start - Date.today + 1).to_i
+      @next_location = @next_van.location
+      weather_forecast
     end
-
-
-    @next_trip = @my_rentals.order(start_date: :desc).limit(1)
-
-    if @next_trip.exists?
-    @next_van = @next_trip[0].van_id
-    @latitude = Van.find(@next_trip[0].van_id).longitude
-    @latitude = Van.find(@next_trip[0].van_id).latitude
-    @next_trip_start =@next_trip[0].start_date
-    @days_to_go = (@next_trip_start - Date.today + 1).to_i
-    @next_location = Van.find(@next_van).location
-    weather_forecast
-    end
-
 
     # Setting message based on trip count
-    if @my_rentals.count == 0
+    if @my_rentals.count.zero?
       @status = "No trips booked yet - why not book one?"
     elsif @my_rentals.count == 1
       @status = "You have #{@rentals.count} trip booked!"
       @status_two = "You are off to #{@next_location}"
       @days_to_go == 1 ? @status_three = "Only #{@days_to_go} day to go!" : @status_three = "Only #{@days_to_go} days to go!"
-      @status_four = "The current weather there is #{@weather}"
+      @status_four = "The current weather there is #{@weather}."
     else
       @status = "You have #{@rentals.count} trips booked!"
       @status_two = "You are off to #{@next_location} next!"
       @days_to_go == 1 ? @status_three = "Only #{@days_to_go} day to go!" : @status_three = "Only #{@days_to_go} days to go!"
-      @status_four = "The current weather there is #{@weather}"
+      @status_four = "The current weather there is #{@weather}."
     end
 
-    owned_vans = Van.where(user_id: 1).ids
-    no_of_rentals = Rental.where(van_id: owned_vans).count
+    owned_vans = @user.vans
+    no_of_rentals = Rental.where(van: owned_vans).count
+
     # Setting status for van owners
-    @user_owns_a_van = Van.where(user_id: @user.id).exists?
+    @user_owns_a_van = !@user.vans.empty?
     if @user_owns_a_van && no_of_rentals > 0
       no_of_rentals == 1 ? @rented_message_one = "You have one #{no_of_rentals} rental" : "Sweet you have one #{no_of_rentals} rentals"
       no_of_rentals == 1 ? @rented_message_two = "Superb - with the money from those you can have some beers!" : "Wow - with those rentals you will be a millionaire!"
     elsif @user_owns_a_van == true
       @rented_message_one = "No rentals just yet why edit your van description to make it even better!"
       @rented_message_two = "Or on second thoughts take it on a road trip!"
-    else
     end
   end
 
