@@ -5,10 +5,17 @@ class VansController < ApplicationController
   def index
     @vans = policy_scope(Van).where.not(latitude: nil, longitude: nil).order(created_at: :desc)
 
-    @hash = Gmaps4rails.build_markers(@vans) do |van, marker|
-      marker.lat van.latitude
-      marker.lng van.longitude
+    @coordinates = @vans.map do |van|
+      if van.latitude && van.longitude
+        {
+          lat: van.latitude,
+          lng: van.longitude,
+          name: van.description,
+          infowindow: render_to_string(partial: "vans/infowindow", locals: {van: van}),
+        }
+      end
     end
+
     @results = params[:query].present? ? Van.global_search(params[:query]) : Van.all
   end
 

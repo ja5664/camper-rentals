@@ -110,23 +110,32 @@
                       ]
                   }
                 ];
+
     // Toggle Button for Map Display
     const map = document.getElementById("map");
     document.getElementById('display-button').onclick = function() {
       map.classList.toggle("shown-map");
-      // arrow.classList.toggle("arrow-toggle");
     };
 
-    // Geocoding
+    // Geocoding - Map Display on Screen
     var handler = Gmaps.build("Google");
     handler.buildMap({
       provider: {
         styles: styles
       }, internal: { id: "map" } }, function() {
-      markers = handler.addMarkers(<%= raw @hash.to_json %>);
+      markers = handler.addMarkers(<%= raw @coordinates.to_json %>);
       handler.bounds.extendWith(markers);
       handler.fitMapToBounds();
-      handler.getMap().setZoom(14);
+      handler.getMap().setZoom(8);
     });
+
+    // Info Window upon Clicking on Marker
+    var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        draggable: true,
+        animation: google.maps.Animation.DROP,
+      });
+
   </script>
 <% end %>
