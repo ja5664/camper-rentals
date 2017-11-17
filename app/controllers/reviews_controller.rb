@@ -1,8 +1,7 @@
 class ReviewsController < ApplicationController
-  before_action :set_van, only: [:new, :create]
+  before_action :set_van, only: [:new, :create, :index]
 
   def index
-    @van = Van.find(params[:van_id])
     @reviews = policy_scope(@van.reviews).order(created_at: :desc)
   end
 
@@ -56,5 +55,6 @@ class ReviewsController < ApplicationController
   def review_params
     params.require(:review).permit(:score, :description, :photo)
   end
+
 end
 
