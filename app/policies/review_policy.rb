@@ -18,3 +18,4 @@ class ReviewPolicy < ApplicationPolicy
     record.user == user
   end
 end
+
