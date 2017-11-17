@@ -11,9 +11,9 @@
           <% (5 - review.score).times do %>
             <i class="fa fa-star-o"></i>
           <% end %>
-        <!-- User and Date/Time -->
+          <!-- User and Date/Time -->
           <p>By <strong><%= User.find(review.user_id).email %></strong> on <strong><%= review.created_at.strftime("%d %b %Y") %></strong></p>
-        <!-- Description -->
+          <!-- Description -->
           <%= review.description %>
         </div>
         <div class="review-photo">
