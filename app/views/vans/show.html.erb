@@ -76,7 +76,9 @@
       <p>
           <div class="link">
           <!-- Add Reviews -->
-          <%= link_to "ADD", new_van_review_path(@van) %> &nbsp|&nbsp
+          <% if policy(@van).edit? == false %>
+            <%= link_to "ADD", new_van_review_path(@van) %> &nbsp|&nbsp
+          <% end %>
           <!-- List All Reviews for Van -->
           <%= link_to "SHOW ALL", van_reviews_path(@van) %>
         </div>
