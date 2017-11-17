@@ -74,7 +74,7 @@
         <% end %>
       </h5>
       <p>
-          <div class="link">
+        <div class="link">
           <!-- Add Reviews -->
           <% if policy(@van).edit? == false %>
             <%= link_to "ADD", new_van_review_path(@van) %> &nbsp|&nbsp
@@ -115,6 +115,7 @@
                     </p>
               </span>
               </div>
+              <%= link_to "DETAILS", review_path(review) %>
           </li>
         <% end %>
       </ul-inline>
