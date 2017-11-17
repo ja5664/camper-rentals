@@ -1,7 +1,7 @@
 <div class="container">
   <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-  <%= current_user.photo %>
+
 
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
     <%= f.error_notification %>
@@ -21,9 +21,9 @@
       <%= f.input :photo %>
       <%= f.input :photo_cache, as: :hidden %>
     </div>
-
+      <%= cl_image_tag current_user.photo, class: 'avatar' %>
     <div class="form-actions">
-    <%= f.button :submit, "Update" %>
+      <%= f.button :submit, "Update" %>
     </div>
   <% end %>
 
@@ -31,7 +31,7 @@
 
   <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 
-  <%= link_to "Back", :back %>
+    <%= link_to "Back", :back %>
 
   <%= content_for(:title, 'Le Campeur') %>
 </div>
