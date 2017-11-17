@@ -5,4 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   has_many :vans
   has_many :reviews
+  mount_uploader :photo, PhotoUploader
 end
