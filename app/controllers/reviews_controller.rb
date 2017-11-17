@@ -22,6 +22,12 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def show
+    @review = Review.find(params[:id])
+    authorize @review
+    @van = Van.find(@review.van_id)
+  end
+
   def edit
     @review = Review.find(params[:id])
     authorize @review

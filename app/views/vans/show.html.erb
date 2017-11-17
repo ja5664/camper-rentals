@@ -74,11 +74,10 @@
         <% end %>
       </h5>
       <p>
-          <div class="link">
+        <div class="link">
           <!-- Add Reviews -->
-          <%= link_to "ADD", new_van_review_path(@van) %> &nbsp|&nbsp
-          <!-- List All Reviews for Van -->
-          <%= link_to "SHOW ALL", van_reviews_path(@van) %>
+          <%= link_to "ADD NEW REVIEWS", new_van_review_path(@van) %>
+
         </div>
       </p>
       <!-- Pop Up -->
@@ -113,6 +112,7 @@
                     </p>
               </span>
               </div>
+              <%= link_to "DETAILS", review_path(review) %>
           </li>
         <% end %>
       </ul-inline>
