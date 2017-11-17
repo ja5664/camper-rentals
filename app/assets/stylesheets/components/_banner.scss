@@ -33,3 +33,21 @@
   margin: 0;
   color: white;
 }
+
+.show-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-position: center;
+  background-size: cover;
+  height: 45vh;
+
+  .booking {
+    text-align: center;
+    color: white;
+
+    h1, h3 {
+      margin-top: 0px;
+    }
+  }
+}
