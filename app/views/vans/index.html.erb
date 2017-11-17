@@ -1,8 +1,3 @@
-<!-- Button: Show Map -->
-<div class="map-button">
-  <h4><button id="display-button" class="btn btn-default" type="geocode">SHOW ON MAP</button></h4>
-</div>
-
 <!-- Geocoding Map -->
 <div id="map" class="hidden-map" style="width: 100%;"></div>
 
@@ -14,16 +9,20 @@
     <div class="card" style="background-image: linear-gradient(rgba(255,255,255,0.2),rgba(0,0,0,0.2)), url(<%= cl_image_path photo_url %>);">
       <div class="card-body">
         <h4><%= van.make.upcase %></h4>
-        <p><%= User.find(van.user_id).first_name %> | <%= van.location.upcase %> - £<%= number_with_delimiter(van.price) %></p>
+        <p><%= van.location.upcase %> | £<%= number_with_delimiter(van.price) %></p>
         <%= link_to "", van_path(van), class: "card-link" %>
       </div>
     </div>
   <% end %>
 </div>
 
+<!-- Button: Show Map -->
+<div id="arrow">
+  <h4><button id="display-button" class="btn btn-default" type="geocode"><i class="fa fa-location-arrow" aria-hidden="true"></i></button></h4>
+</div>
+
 <%= content_for(:title, 'Le Campeur') %>
 
-<!-- JavaScript: Toggle Map Display -->
 <% content_for(:after_js) do %>
   <script>
     // Snazzy Maps - Theme: Cool Grey
@@ -114,7 +113,8 @@
     // Toggle Button for Map Display
     const map = document.getElementById("map");
     document.getElementById('display-button').onclick = function() {
-      map.classList.toggle("shown-map")
+      map.classList.toggle("shown-map");
+      // arrow.classList.toggle("arrow-toggle");
     };
 
     // Geocoding

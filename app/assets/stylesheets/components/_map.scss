@@ -1,5 +1,8 @@
-.map-button {
-  text-align: center;
+#arrow {
+  position: fixed;
+  top: 65px;
+  left: 15px;
+  z-index: 2;
 }
 
 .hidden-map {
