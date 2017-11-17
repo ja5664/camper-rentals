@@ -27,7 +27,7 @@
               <i class="fa fa-star-o"></i>
             <% end %>
             <!-- User and Date/Time -->
-            <p>By <strong><%= @van.user.first_name %></strong> on <strong><%= review.created_at.strftime("%d %b %Y") %></strong></p>
+            <p>Submitted on <strong><%= review.created_at.strftime("%d %b %Y") %></strong></p>
             <!-- Description -->
             <%= review.description %>
           </div>
