@@ -54,15 +54,6 @@ $duration: 0.5s;
 $delay: 0.2s;
 $color: coral;
 
-* { box-sizing: border-box; }
-
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
-
-body{
-  font-family: "Open Sans";
-  font-size:16px;
-   background-color: #eee;
-}
 
 /**
 * Title
@@ -81,25 +72,20 @@ body{
 **/
 
 .booking__card {
-  position: absolute;
-  margin-top: 10px;
-  margin-left: 20px;
+  margin-bottom: 20px;
   // left: 50%;
   // top: 50%;
     // left: 50%;
   // transform :  translateX(-50%) translateY(-50%) translateZ(0);
 
-  width:80%;
+  width: 100%;
 
   background-color: #fff;
   box-shadow:0 0 20px rgba(black,0.1);
-
-  overflow:hidden;
-
   transition: box-shadow $duration;
 
-  a{
-    color:inherit;
+  a {
+    color: inherit;
     text-decoration: none;
   }
 }
@@ -149,10 +135,9 @@ body{
 
 .card__thumb{
   height: 245px;
-
+  background-size: cover;
+  background-position: center;
   overflow:hidden;
-
-  background-color: #000;
 
   transition: height $duration;
 
@@ -240,6 +225,11 @@ body{
   transition: opacity $duration -$delay, transform $duration -$delay;
   transition-delay: 0s;
 
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
   .booking__card:hover &{
     opacity:1;
     transform: translateY(0);
@@ -249,7 +239,7 @@ body{
 
 .card__footer{
   position: absolute;
-  bottom: 12px;
+  bottom: 25px;
   left: 20px;
   right: 20px;
 
@@ -268,7 +258,4 @@ body{
   }
 }
 
-.rentals-card-container{
-
-}
 
