@@ -43,3 +43,11 @@
   padding-top: 10px;
   padding-bottom: 10px;
 }
+
+#new_background {
+  background-image: url('new_orange.jpg');
+  // background-size: cover;
+  background-size: cover;
+  width: 100%;
+  background-position: center;
+}

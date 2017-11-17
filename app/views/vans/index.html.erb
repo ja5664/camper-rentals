@@ -114,7 +114,6 @@
     const map = document.getElementById("map");
     document.getElementById('display-button').onclick = function() {
       map.classList.toggle("shown-map");
-      // arrow.classList.toggle("arrow-toggle");
     };
 
     // Geocoding
@@ -123,7 +122,7 @@
       provider: {
         styles: styles
       }, internal: { id: "map" } }, function() {
-      markers = handler.addMarkers(<%= raw @hash.to_json %>);
+      markers = handler.addMarkers(<%= raw @coordinates.to_json %>);
       handler.bounds.extendWith(markers);
       handler.fitMapToBounds();
       handler.getMap().setZoom(14);
