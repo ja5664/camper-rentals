@@ -10,11 +10,10 @@
 <div class="cards">
   <% @results.each do |van| %>
     <% photo_url = van.photo? ? van.photo : 'lix2bqmp4kzdpu4sqjiy' %>
-    <div class="card" style="background-image: url(<%= cl_image_path photo_url %>);">
+    <div class="card" style="background-image: linear-gradient(rgba(255,255,255,0.2),rgba(0,0,0,0.2)), url(<%= cl_image_path photo_url %>);">
       <div class="card-body">
-        <h4><%= van.make %></h4>
-        <h6><light><%= van.location %></light></h6>
-        <h6><light>£<%= number_with_delimiter(van.price) %></light></h6>
+        <h4><%= van.make.upcase %></h4>
+        <p><%= User.find(van.user_id).first_name %> | <%= van.location.upcase %> - £<%= number_with_delimiter(van.price) %></p>
         <%= link_to "", van_path(van), class: "card-link" %>
       </div>
     </div>
