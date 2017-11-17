@@ -24,9 +24,12 @@ class RentalsController < ApplicationController
 
     if @next_trip.exists?
     @next_van = @next_trip[0].van_id
+    @latitude = Van.find(@next_trip[0].van_id).longitude
+    @latitude = Van.find(@next_trip[0].van_id).latitude
     @next_trip_start =@next_trip[0].start_date
     @days_to_go = (@next_trip_start - Date.today + 1).to_i
     @next_location = Van.find(@next_van).location
+    weather_forecast
     end
 
 
@@ -37,9 +40,12 @@ class RentalsController < ApplicationController
       @status = "You have #{@rentals.count} trip booked!"
       @status_two = "You are off to #{@next_location}"
       @days_to_go == 1 ? @status_three = "Only #{@days_to_go} day to go!" : @status_three = "Only #{@days_to_go} days to go!"
+      @status_four = "The current weather there is #{@weather}"
     else
       @status = "You have #{@rentals.count} trips booked!"
-
+      @status_two = "You are off to #{@next_location} next!"
+      @days_to_go == 1 ? @status_three = "Only #{@days_to_go} day to go!" : @status_three = "Only #{@days_to_go} days to go!"
+      @status_four = "The current weather there is #{@weather}"
     end
 
     owned_vans = Van.where(user_id: 1).ids
@@ -118,17 +124,14 @@ class RentalsController < ApplicationController
   end
 
   def weather_forecast
-    # require 'json'
-    # require 'open-uri'
-    # key = ENV['OPEN_WEATHER_KEY']
-    # latitude = 20
-    # longitude = 20
-    # url = "http://api.openweathermap.org/data/2.5/forecast?lat=#{latitude}&lon=#{longitude}&APPID=#{key}"
-    # weather_serialized = open(url).read
-    # @forecast = JSON.parse(weather_serialized)
-    # @weather = ["#{@forecast["list"][7]["weather"][0]["main"]}","#{@forecast["list"][15]["weather"][0]["main"]}",
-    # "#{@forecast["list"][23]["weather"][0]["main"]}","#{@forecast["list"][31]["weather"][0]["main"]}",
-    # "#{@forecast["list"][39]["weather"][0]["main"]}"]
-    @weather = "sunny"
+    require 'json'
+    require 'open-uri'
+    key = ENV['OPEN_WEATHER_KEY']
+    latitude = 20
+    longitude = 20
+    url = "http://api.openweathermap.org/data/2.5/forecast?lat=#{latitude}&lon=#{longitude}&APPID=#{key}"
+    weather_serialized = open(url).read
+    @forecast = JSON.parse(weather_serialized)
+    @weather = ["#{@forecast["list"][7]["weather"][0]["main"]}"].join.downcase
   end
 end
