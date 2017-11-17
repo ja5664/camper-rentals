@@ -6,10 +6,10 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   resources :vans do
-    resources :rentals, only: [:index, :new, :create]
+    resources :rentals, only: [:new, :create]
     resources :reviews, only: [:index, :new, :create]
   end
 
-  resources :rentals, only: [:show, :edit, :update, :destroy]
+  resources :rentals, only: [:index, :show, :edit, :update, :destroy]
   resources :reviews, only: [:show, :edit, :update, :destroy]
 end
