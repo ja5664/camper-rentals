@@ -5,29 +5,47 @@
   grid-template-rows: 50% 50%;
 }
 
-.review-banner {
-  height: 300px;
-}
-
-.comment {
+.banner-image {
+  grid-row: 1 / span 1;
+  height: calc(50vh - 52.5px);
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  width: 60%;
-  margin: auto;
-  border-bottom: 1px solid #9099A2;
-  padding: 15px 0px;
+  justify-content: space-around;
+  background-position: center;
+  background-size: cover;
+  position: sticky !important;
+  top: 0px !important;
+
+  .title {
+    color: white;
+    text-align: center;
+  }
 }
 
-.comment:last-child {
+.review-wrapper {
+  grid-row: 2 / span 1;
+  padding-top: 10px;
+
+  .comment {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 60%;
+    margin: auto;
+    border-bottom: 1px solid #9099A2;
+    padding: 15px 0px;
+  }
+
+  .comment:last-child {
     border-bottom: none;
   }
 
-.review-content {
-  flex: 1 1 auto;
-  align-items: center;
-}
+  .review-content {
+    flex: 1 1 auto;
+    align-items: center;
+  }
 
-.review-photo {
-  flex: 0 0 auto;
+  .review-photo {
+    flex: 0 0 auto;
+  }
 }
