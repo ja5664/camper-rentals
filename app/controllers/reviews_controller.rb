@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :set_van, only: [:new, :create, :index]
+  skip_before_action :authenticate_user!, only: [:index]
 
   def index
     @reviews = policy_scope(@van.reviews).order(created_at: :desc)
